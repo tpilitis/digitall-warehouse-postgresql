@@ -8,6 +8,6 @@ namespace Digitall.Warehouse.Domain.Entities.Products
 
         public string Name { get; set; }
 
-        public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
+        public ICollection<ProductCategory> ProductCategories { get; set; } = [];
     }
 }

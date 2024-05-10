@@ -3,10 +3,9 @@
 namespace Digitall.Warehouse.Domain.Entities.Products
 {
     /// <summary>
-    /// TODO: This shall be a value type when we create EF initial db - part of the same table.
+    /// Price complext type.
     /// </summary>
-    /// <param name="Value"></param>
-    /// <param name="CurrencyCode"></param>
-    [ComplexType]
+    /// <param name="Value">Price Value</param>
+    /// <param name="CurrencyCode">ISO Currency code</param>
     public record Price (decimal Value, string CurrencyCode);
 }

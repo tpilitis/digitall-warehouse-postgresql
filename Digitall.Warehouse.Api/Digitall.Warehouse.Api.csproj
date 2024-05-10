@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Digitall.Persistance.EF\Digitall.Persistance.EF.csproj" />
     <ProjectReference Include="..\Digitall.Warehouse.Application\Digitall.Warehouse.Application.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,4 @@
 ﻿using Digitall.Warehouse.Domain.Abstraction;
-using System.ComponentModel.DataAnnotations;
 
 namespace Digitall.Warehouse.Domain.Entities.Products
 {
@@ -7,17 +6,16 @@ namespace Digitall.Warehouse.Domain.Entities.Products
     {
         public Guid Id { get; }
 
-        [MaxLength(255)]
         public string Title { get; set; } = null!;
 
-        [MaxLength(500)]
         public string? Description { get; set; }
 
         public Brand? Brand { get; set; }
 
-        [Required]
-        public Price? Price { get; set; }
+        public Guid BrandId { get; protected set; }
 
-        public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
+        public Price Price { get; set; } = null!;
+
+        public ICollection<ProductCategory> ProductCategories { get; set; } = [];
     }
 }
