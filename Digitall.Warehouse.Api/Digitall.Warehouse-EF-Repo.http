@@ -1,0 +1,6 @@
+@Digitall.Warehouse_EF_Repo_HostAddress = http://localhost:5179
+
+GET {{Digitall.Warehouse_EF_Repo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
