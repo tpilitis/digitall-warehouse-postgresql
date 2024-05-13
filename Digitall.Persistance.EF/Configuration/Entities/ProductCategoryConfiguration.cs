@@ -9,16 +9,6 @@ namespace Digitall.Persistance.EF.Configuration.Entities
         public void Configure(EntityTypeBuilder<ProductCategory> builder)
         {
             builder.HasKey(p => new { p.ProductId, p.CategoryId});
-
-            builder
-                .HasOne(pc => pc.Product)
-                .WithMany(pc => pc.ProductCategories)
-                .HasForeignKey(pc => pc.ProductId);
-
-            builder
-                .HasOne(pc => pc.Category)
-                .WithMany(pc => pc.ProductCategories)
-                .HasForeignKey(pc => pc.CategoryId);
         }
     }
 }

@@ -20,8 +20,8 @@ namespace Digitall.Persistance.EF.Configuration.Entities
                 .HasMaxLength(EntityTypeConstants.MaxLength500);
 
             builder
-                .HasOne(p => p.Brand)
-                .WithMany(p => p.Products)
+                .HasOne(product => product.Brand)
+                .WithMany(brand => brand.Products)
                 .HasForeignKey(p => p.BrandId);
 
             builder
@@ -36,7 +36,17 @@ namespace Digitall.Persistance.EF.Configuration.Entities
                         .Property(price => price.CurrencyCode)
                         .HasMaxLength(EntityTypeConstants.IsoCodeMaxLength)
                         .IsRequired();
-                });       
+                });
+
+            builder
+                .HasMany(product => product.Variants)
+                .WithOne()
+                .HasForeignKey(p => p.ProductId);
+
+            builder
+                .HasMany(product => product.ProductCategories)
+                .WithOne()
+                .HasForeignKey(product=>product.ProductId);
         }
     }
 }
