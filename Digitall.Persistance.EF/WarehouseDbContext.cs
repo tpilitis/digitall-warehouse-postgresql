@@ -1,4 +1,5 @@
-﻿using Digitall.Warehouse.Domain.Entities.Products;
+﻿using Digitall.Persistance.EF.Extensions;
+using Digitall.Warehouse.Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 
 namespace Digitall.Persistance.EF
