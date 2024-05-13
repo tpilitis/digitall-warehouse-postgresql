@@ -1,4 +1,4 @@
-﻿using Digitall.Persistance.EF.Abstractions;
+﻿using Digitall.Warehouse.Application;
 using Digitall.Warehouse.Domain.Entities.Products;
 
 namespace Digitall.Persistance.EF.Seeds;

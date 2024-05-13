@@ -1,5 +1,5 @@
-﻿using Digitall.Persistance.EF.Abstractions;
-using Digitall.Persistance.EF.Seeds;
+﻿using Digitall.Persistance.EF.Seeds;
+using Digitall.Warehouse.Application;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

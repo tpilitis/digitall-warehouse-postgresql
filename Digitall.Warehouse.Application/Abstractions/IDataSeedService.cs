@@ -1,4 +1,4 @@
-﻿namespace Digitall.Persistance.EF.Abstractions;
+﻿namespace Digitall.Warehouse.Application;
 
 public interface IDataSeedService
 {

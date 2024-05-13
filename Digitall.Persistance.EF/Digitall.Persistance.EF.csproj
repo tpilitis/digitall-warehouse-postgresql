@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Digitall.Warehouse.Application\Digitall.Warehouse.Application.csproj" />
     <ProjectReference Include="..\Digitall.Warehouse.Domain\Digitall.Warehouse.Domain.csproj" />
   </ItemGroup>
 

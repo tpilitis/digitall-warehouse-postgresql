@@ -1,4 +1,4 @@
-﻿using Digitall.Persistance.EF.Abstractions;
+﻿using Digitall.Warehouse.Application;
 
 namespace Digitall.Warehouse.Api
 {
