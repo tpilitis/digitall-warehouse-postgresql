@@ -1,28 +1,32 @@
-﻿using Digitall.Persistance.EF.Extensions;
-using Digitall.Warehouse.Domain.Entities.Products;
+﻿using Digitall.Warehouse.Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 
-namespace Digitall.Persistance.EF
+namespace Digitall.Persistance.EF;
+
+public class WarehouseDbContext : DbContext
 {
-    public class WarehouseDbContext : DbContext
+    public WarehouseDbContext(DbContextOptions options) : base(options)
     {
-        public WarehouseDbContext(DbContextOptions options) : base(options)
-        {
-        }
+    }
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Brand> Brands { get; set; }
-        public DbSet<ProductCategory> ProductCategory { get; set; }
-        public DbSet<ProductVariant> Variants { get; set; }
-        public DbSet<ProductSwatch> Swatches { get; set; }
-        public DbSet<ProductSize> Sizes { get; set; }
+    public DbSet<Product> Products { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+    public DbSet<Category> Categories { get; set; }
 
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(WarehouseDbContext).Assembly);
-        }
+    public DbSet<Brand> Brands { get; set; }
+
+    public DbSet<ProductCategory> ProductCategory { get; set; }
+
+    public DbSet<ProductVariant> Variants { get; set; }
+
+    public DbSet<ProductSwatch> Swatches { get; set; }
+
+    public DbSet<ProductSize> Sizes { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(WarehouseDbContext).Assembly);
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace Digitall.Persistance.EF.Abstractions
+﻿namespace Digitall.Persistance.EF.Abstractions;
+
+public interface IDataSeedService
 {
-    public interface IDataSeedService
-    {
-        void Seed();
-    }
+    void Seed();
 }

@@ -2,20 +2,19 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Digitall.Persistance.EF.Configuration.Entities
+namespace Digitall.Persistance.EF.Configuration.Entities;
+
+public class ProductSwatchConfiguration : IEntityTypeConfiguration<ProductSwatch>
 {
-    public class ProductSwatchConfiguration : IEntityTypeConfiguration<ProductSwatch>
+    public void Configure(EntityTypeBuilder<ProductSwatch> builder)
     {
-        public void Configure(EntityTypeBuilder<ProductSwatch> builder)
-        {
-            builder.HasKey(size => size.Id);
+        builder.HasKey(size => size.Id);
 
-            builder
-                .Property(size => size.Name)
-                .IsRequired()
-                .HasMaxLength(EntityTypeConstants.MaxLength50);
+        builder
+            .Property(size => size.Name)
+            .IsRequired()
+            .HasMaxLength(EntityTypeConstants.MaxLength50);
 
-            builder.HasIndex(size => size.Name).IsUnique();
-        }
+        builder.HasIndex(size => size.Name).IsUnique();
     }
 }
