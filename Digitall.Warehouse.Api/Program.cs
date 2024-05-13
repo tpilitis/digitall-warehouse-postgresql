@@ -1,4 +1,5 @@
 using Digitall.Persistance.EF.Extensions;
+using Digitall.Warehouse.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,4 +27,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.SeedData().Run();
