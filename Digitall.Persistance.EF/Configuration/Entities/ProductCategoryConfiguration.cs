@@ -8,7 +8,7 @@ namespace Digitall.Persistance.EF.Configuration.Entities
     {
         public void Configure(EntityTypeBuilder<ProductCategory> builder)
         {
-            builder.HasKey(p => new { p.ProductId, p.CategoryId});
+            builder.HasKey(p => p.Id);
         }
     }
 }

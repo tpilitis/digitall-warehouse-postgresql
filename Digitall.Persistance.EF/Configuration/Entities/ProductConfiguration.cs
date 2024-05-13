@@ -44,9 +44,11 @@ namespace Digitall.Persistance.EF.Configuration.Entities
                 .HasForeignKey(p => p.ProductId);
 
             builder
-                .HasMany(product => product.ProductCategories)
-                .WithOne()
-                .HasForeignKey(product=>product.ProductId);
+                .HasMany(p => p.Categories)
+                .WithMany(c => c.Products)
+                .UsingEntity<ProductCategory>(
+                left => left.HasOne<Category>().WithMany().HasForeignKey(pc => pc.CategoryId),
+                right => right.HasOne<Product>().WithMany().HasForeignKey(pc => pc.ProductId));
         }
     }
 }

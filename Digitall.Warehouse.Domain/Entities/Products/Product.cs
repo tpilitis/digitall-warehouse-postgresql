@@ -16,7 +16,7 @@ namespace Digitall.Warehouse.Domain.Entities.Products
 
         public Price Price { get; set; } = null!;
 
-        public ICollection<ProductCategory> ProductCategories { get; set; } = [];
+        public ICollection<Category> Categories { get; set; } = [];
 
         public ICollection<ProductVariant> Variants { get; set; } = [];
     }

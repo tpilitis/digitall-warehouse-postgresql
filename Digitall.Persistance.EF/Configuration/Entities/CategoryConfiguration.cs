@@ -14,11 +14,6 @@ namespace Digitall.Persistance.EF.Configuration.Entities
                 .Property(category => category.Name)
                 .IsRequired()
                 .HasMaxLength(EntityTypeConstants.MaxLength255);
-
-            builder
-                .HasMany(c => c.ProductCategories)
-                .WithOne()
-                .HasForeignKey(c => c.CategoryId);
         }
     }
 }
