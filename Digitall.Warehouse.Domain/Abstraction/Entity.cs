@@ -1,7 +1,13 @@
-﻿namespace Digitall.Warehouse.Domain.Abstraction
+﻿using System.Security.Authentication.ExtendedProtection;
+
+namespace Digitall.Warehouse.Domain.Abstraction
 {
-    public abstract class Entity<TId> : IIdentifiable<TId>
+    public abstract class Entity(Guid id) : IIdentifiable<Guid>
     {
-        public TId Id { get; set; } = default!;
+        public Guid Id { get; set; } = id;
+
+        protected Entity() : this(Guid.NewGuid())
+        {
+        }
     }
 }

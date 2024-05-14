@@ -4,7 +4,7 @@ namespace Digitall.Warehouse.Application.Persistence
 {
     public interface ICategoryRepository
     {
-        Task<Category?> GetCategoryByIdAsync(Guid categoryId);
+        Task<Category?> GetByIdAsync(Guid categoryId);
 
         Task AddAsync(Category category);
 

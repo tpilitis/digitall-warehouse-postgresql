@@ -4,7 +4,7 @@ namespace Digitall.Warehouse.Application.Persistence
 {
     public interface IProductRepository
     {
-        Task<Product?> GetProductById(Guid productId);
+        Task<Product?> GetByIdAsync(Guid productId);
 
         Task AddAsync(Product product);
 
