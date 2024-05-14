@@ -1,5 +1,7 @@
-﻿using Digitall.Persistance.EF.Seeds;
+﻿using Digitall.Persistance.EF.Repositories;
+using Digitall.Persistance.EF.Seeds;
 using Digitall.Warehouse.Application;
+using Digitall.Warehouse.Application.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +17,10 @@ public static class DependencyRegistrationExtension
             .AddDbContext<WarehouseDbContext>(
                 opt => opt.UseSqlServer(configuration.GetConnectionString("WarehouseConnection")));
 
-        services.AddTransient<IDataSeedService, ProductDataSeedService>();
+        services.AddScoped<IDataSeedService, ProductDataSeedService>();
+
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
 
         return services;
     }
