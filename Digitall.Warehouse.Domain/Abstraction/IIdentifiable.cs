@@ -1,6 +1,6 @@
 ﻿namespace Digitall.Warehouse.Domain.Abstraction;
 
-public interface IIdentifiable<out TId>
+public interface IIdentifiable<TId>
 {
-    TId Id { get; }
+    TId Id { get; set; }
 }

@@ -4,7 +4,7 @@ namespace Digitall.Warehouse.Domain.Entities.Products;
 
 public class ProductVariant : IIdentifiable<Guid>
 {
-    public Guid Id { get; }
+    public Guid Id { get; set; }
 
     public Guid ProductId { get; set; }
 
