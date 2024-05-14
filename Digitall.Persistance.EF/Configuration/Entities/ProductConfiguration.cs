@@ -15,6 +15,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .IsRequired()
             .HasMaxLength(EntityTypeConstants.MaxLength255);
 
+        builder.HasIndex(product => product.Title);
+
         builder
             .Property(product => product.Description)
             .HasMaxLength(EntityTypeConstants.MaxLength500);
