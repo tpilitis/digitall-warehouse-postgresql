@@ -14,5 +14,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
             .Property(category => category.Name)
             .IsRequired()
             .HasMaxLength(EntityTypeConstants.MaxLength255);
+
+        builder.HasIndex(category => category.Name).IsUnique();
     }
 }
