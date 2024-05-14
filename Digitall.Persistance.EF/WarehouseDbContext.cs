@@ -7,6 +7,7 @@ public class WarehouseDbContext : DbContext
 {
     public WarehouseDbContext(DbContextOptions options) : base(options)
     {
+        Database.Migrate();
     }
 
     public DbSet<Product> Products { get; set; }
