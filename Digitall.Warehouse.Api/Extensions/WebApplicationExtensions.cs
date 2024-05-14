@@ -1,6 +1,6 @@
 ﻿using Digitall.Warehouse.Application;
 
-namespace Digitall.Warehouse.Api
+namespace Digitall.Warehouse.Api.Extensions
 {
     public static class WebApplicationExtensions
     {

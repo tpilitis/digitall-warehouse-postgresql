@@ -1,5 +1,5 @@
 using Digitall.Persistance.EF.Extensions;
-using Digitall.Warehouse.Api;
+using Digitall.Warehouse.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
