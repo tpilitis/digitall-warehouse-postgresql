@@ -8,9 +8,9 @@ namespace Digitall.Persistance.EF.Repositories
     {
         protected readonly WarehouseDbContext DbContext = dbContext;
 
-        public async Task AddAsync(TEntity entity)
+        public async Task AddAsync(TEntity entity, CancellationToken cancellationToken)
         {
-            await DbContext.Set<TEntity>().AddAsync(entity);
+            await DbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
         }
 
         public void Update(TEntity entity)

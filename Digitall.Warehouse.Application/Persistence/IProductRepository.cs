@@ -6,7 +6,7 @@ namespace Digitall.Warehouse.Application.Persistence
     {
         Task<Product?> GetByIdAsync(Guid productId);
 
-        Task AddAsync(Product product);
+        Task AddAsync(Product product, CancellationToken cancellationToken);
 
         Task<ICollection<Product>> GetProductsByTitleAsync(string title);
 

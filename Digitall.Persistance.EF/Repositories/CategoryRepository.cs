@@ -7,6 +7,15 @@ namespace Digitall.Persistance.EF.Repositories
     public class CategoryRepository(WarehouseDbContext dbContext)
                 : Repository<Category>(dbContext), ICategoryRepository
     {
+        public async Task<Category?> GetByNameAsync(string name)
+        {
+            var category = await DbContext
+                .Set<Category>()
+                .SingleOrDefaultAsync(category => category.Name == name);
+
+            return category;
+        }
+
         public async Task<ICollection<Product>> GetCategoryProductsAsync(string categoryName)
         {
             var category = await DbContext
