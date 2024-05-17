@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digitall.Warehouse.Applicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Digitall.Warehouse.Domain", "Digitall.Warehouse.Domain\Digitall.Warehouse.Domain.csproj", "{BBF9327B-62A3-4DA4-9626-F13C918AA2F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Digital.Warehouse.Utils", "Digital.Warehouse.Utils\Digital.Warehouse.Utils.csproj", "{D5CE08D9-994F-45FE-B015-9B38EC3FB97C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{BBF9327B-62A3-4DA4-9626-F13C918AA2F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBF9327B-62A3-4DA4-9626-F13C918AA2F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBF9327B-62A3-4DA4-9626-F13C918AA2F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5CE08D9-994F-45FE-B015-9B38EC3FB97C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5CE08D9-994F-45FE-B015-9B38EC3FB97C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5CE08D9-994F-45FE-B015-9B38EC3FB97C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5CE08D9-994F-45FE-B015-9B38EC3FB97C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +51,7 @@ Global
 		{58D4C84C-E59C-43D1-A060-0AE5B4AEE509} = {E55F882D-8BA1-4795-B522-2CE3F606DDFD}
 		{0CD82859-4408-43D5-9CB0-304D463D6407} = {B40CDB9C-A12D-47CA-9B83-A80D487690D0}
 		{BBF9327B-62A3-4DA4-9626-F13C918AA2F2} = {B40CDB9C-A12D-47CA-9B83-A80D487690D0}
+		{D5CE08D9-994F-45FE-B015-9B38EC3FB97C} = {B40CDB9C-A12D-47CA-9B83-A80D487690D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2261F371-EDD1-43FB-AE31-3FF55919848F}

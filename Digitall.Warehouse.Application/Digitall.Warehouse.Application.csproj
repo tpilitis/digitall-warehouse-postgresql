@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Digital.Warehouse.Utils\Digital.Warehouse.Utils.csproj" />
     <ProjectReference Include="..\Digitall.Warehouse.Domain\Digitall.Warehouse.Domain.csproj" />
   </ItemGroup>
 
