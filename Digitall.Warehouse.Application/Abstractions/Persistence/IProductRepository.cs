@@ -1,6 +1,6 @@
 ﻿using Digitall.Warehouse.Domain.Entities.Products;
 
-namespace Digitall.Warehouse.Application.Persistence
+namespace Digitall.Warehouse.Application.Abstractions.Persistence
 {
     public interface IProductRepository
     {

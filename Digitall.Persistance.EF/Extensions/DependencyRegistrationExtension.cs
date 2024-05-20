@@ -1,7 +1,7 @@
 ﻿using Digitall.Persistance.EF.Repositories;
 using Digitall.Persistance.EF.Seeds;
 using Digitall.Warehouse.Application;
-using Digitall.Warehouse.Application.Persistence;
+using Digitall.Warehouse.Application.Abstractions.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

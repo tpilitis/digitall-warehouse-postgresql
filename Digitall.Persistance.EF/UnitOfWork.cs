@@ -1,4 +1,4 @@
-﻿using Digitall.Warehouse.Application.Persistence;
+﻿using Digitall.Warehouse.Application.Abstractions.Persistence;
 using Digitall.Warehouse.Domain.Abstraction;
 using Microsoft.EntityFrameworkCore;
 
