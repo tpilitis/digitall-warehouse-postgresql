@@ -1,10 +1,16 @@
 using Digitall.Persistance.EF.Extensions;
 using Digitall.Warehouse.Api.Extensions;
+using Digitall.Warehouse.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddPersistanceEF(builder.Configuration);
+ 
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssembly(AssemblyReference.Assembly);
+});
 
 builder.Services.AddControllers();
 
