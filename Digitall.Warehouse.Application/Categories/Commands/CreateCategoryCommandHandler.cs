@@ -3,7 +3,7 @@ using Digitall.Warehouse.Application.Abstractions.Persistence;
 using Digitall.Warehouse.Domain.Entities.Products;
 using Digitall.Warehouse.Domain.Shared;
 
-namespace Digitall.Warehouse.Application.Categories
+namespace Digitall.Warehouse.Application.Categories.Commands
 {
     public class CreateCategoryCommandHandler : ICommandHandler<CreateCategoryCommand>
     {

@@ -1,5 +1,6 @@
 ﻿using Digitall.Warehouse.Api.Contracts.Requests;
-using Digitall.Warehouse.Application.Categories;
+using Digitall.Warehouse.Application.Categories.Commands;
+using Digitall.Warehouse.Application.Categories.Queries.GetCategoryByName;
 using Digitall.Warehouse.Domain.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -38,5 +39,27 @@ public class CategoriesController : ControllerBase
         }
 
         return NoContent();
+    }
+
+    [ProducesResponseType(typeof(Error), (int)HttpStatusCode.NotFound)]
+    [ProducesResponseType(typeof(Error), (int)HttpStatusCode.FailedDependency)]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [HttpGet("name")]
+    public async Task<IActionResult> GetCategory([FromQuery] string name, CancellationToken token)
+    {
+        var createCategoryQuery = new GetCategoryByNameQuery(name);
+        var result = await _sender.Send(createCategoryQuery, token);
+
+        if (result.IsFailure)
+        {
+            // expect and return
+            return result.Error.Code switch
+            {
+                Error.NotFoundValueCode => BadRequest(result.Error),
+                _ => StatusCode((int)HttpStatusCode.FailedDependency, result.Error)
+            };
+        }
+
+        return Ok(result.Value);
     }
 }
