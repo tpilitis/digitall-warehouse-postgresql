@@ -22,13 +22,6 @@ namespace Digitall.Warehouse.Application.Categories.Commands
             CreateCategoryCommand request,
             CancellationToken cancellationToken)
         {
-            var existingCategory = await _categoryRepository.GetByNameAsync(request.Name);
-            if (existingCategory != null)
-            {
-                // category must be unique
-                return Result.Failure(Error.DuplicatedValue(nameof(request.Name)));
-            }
-
             var category = new Category()
             {
                 Name = request.Name,
