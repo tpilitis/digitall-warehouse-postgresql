@@ -4,9 +4,10 @@ using Digitall.Warehouse.Application.Persistence;
 using Digitall.Warehouse.Domain.Entities.Products;
 
 namespace Digitall.Warehouse.Application.Categories.AddCategory;
+
 public sealed record AddCategoryCommand(string Name) : ICommand;
 
-/// CQRS with MediatR --> watch and play: https://www.youtube.com/watch?v=vdi-p9StmG0
+/// CQRS with from scratch - https://www.youtube.com/watch?v=85YbMEb1qkQ
 public sealed class AddCategoryCommandHandler(ICategoryRepository categoryRepository) : ICommandHandler<AddCategoryCommand>
 {
     private readonly ICategoryRepository categoryRepository = categoryRepository;
