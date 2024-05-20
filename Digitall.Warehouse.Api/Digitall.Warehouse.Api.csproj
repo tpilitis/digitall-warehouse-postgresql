@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Digitall.Warehouse.Application\Digitall.Warehouse.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contracts\Responses\" />
+  </ItemGroup>
+
 </Project>

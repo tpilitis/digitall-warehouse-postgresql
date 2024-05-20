@@ -4,7 +4,7 @@ using MediatR;
 namespace Digitall.Warehouse.Application.Abstractions.Messaging;
 
 public interface ICommandHandler<TCommand> : IRequestHandler<TCommand, Result>
-    where TCommand : ICommand, new()
+    where TCommand : ICommand
 {
 }
 
