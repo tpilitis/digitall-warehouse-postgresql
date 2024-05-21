@@ -1,5 +1,6 @@
 using Digitall.Persistance.EF.Extensions;
 using Digitall.Warehouse.Api.Extensions;
+using Digitall.Warehouse.Api.Infrastructure.ExceptionHandling;
 using Digitall.Warehouse.Application;
 using Digitall.Warehouse.Application.Behaviors;
 using Digitall.Warehouse.Application.Categories.Commands;
@@ -39,6 +40,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
