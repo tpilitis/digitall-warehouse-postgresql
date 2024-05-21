@@ -6,7 +6,10 @@ namespace Digitall.Warehouse.Application.Categories.Commands;
 
 public class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCommand>
 {
-    public CreateCategoryCommandValidator(ICategoryRepository categoryRepository) => 
+    public CreateCategoryCommandValidator(ICategoryRepository categoryRepository)
+    {
+        ClassLevelCascadeMode = CascadeMode.Stop;
+
         RuleFor(cmd => cmd.Name)
             .NotEmpty()
             .MaximumLength(EntityTypeConstants.MaxLength255)
@@ -15,5 +18,7 @@ public class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCo
                 var category = await categoryRepository!.GetByNameAsync(name);
                 return category == null;
             })
-            .WithMessage("Category name must be unique.");
+            .WithErrorCode(ValidationFailureCodes.CategoryNameAlreadyExists.Name)
+            .WithMessage(ValidationFailureCodes.CategoryNameAlreadyExists);
+    }
 }
