@@ -7,6 +7,16 @@ namespace Digitall.Persistance.EF.Repositories
     public class CategoryRepository(WarehouseDbContext dbContext)
                 : Repository<Category>(dbContext), ICategoryRepository
     {
+        public async Task<ICollection<Category>> GetAllByIdsAsync(List<Guid> categoryIds, CancellationToken cancellationToken)
+        {
+            var categories = await DbContext
+                .Set<Category>()
+                .Where(category => categoryIds.Contains(category.Id))
+                .ToListAsync();
+
+            return categories;
+        }
+
         public async Task<Category?> GetByNameAsync(string name)
         {
             var category = await DbContext

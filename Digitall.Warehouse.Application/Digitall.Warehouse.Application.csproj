@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Digitall.Warehouse.Domain\Digitall.Warehouse.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Products\Queries\" />
+  </ItemGroup>
+
 </Project>
