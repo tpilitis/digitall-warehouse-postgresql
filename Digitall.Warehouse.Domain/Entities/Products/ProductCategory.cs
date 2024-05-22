@@ -4,7 +4,7 @@ namespace Digitall.Warehouse.Domain.Entities.Products;
 
 public class ProductCategory(Guid id) : Entity(id)
 {
-    private ProductCategory(): this(Guid.NewGuid())
+    private ProductCategory() : this(Guid.NewGuid())
     {
     }
 

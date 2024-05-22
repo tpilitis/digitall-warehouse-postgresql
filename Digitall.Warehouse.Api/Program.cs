@@ -31,7 +31,7 @@ builder.Services.AddSerilog((serviceProvider, loggerConfiguration) =>
 
 // Add services to the container.
 builder.Services.AddPersistanceEF(builder.Configuration);
- 
+
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(AssemblyReference.Assembly);

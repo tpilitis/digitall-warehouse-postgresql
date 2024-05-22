@@ -16,7 +16,7 @@ internal static class ModelBindingExtensions
 
         var errorResponse = new ErrorResponse(
             string.Empty,
-            modelEntry?.Exception != null ? modelEntry!.Exception.Message : modelEntry!.ErrorMessage);
+            modelEntry?.Exception is not null ? modelEntry!.Exception.Message : modelEntry!.ErrorMessage);
 
         return new ValidationErrorResponse(new List<ErrorResponse>() { errorResponse });
     }

@@ -34,7 +34,7 @@ public class CategoriesController : ControllerBase
             return result.Error.Code switch
             {
                 Error.DuplicatedValueCode => BadRequest(result.Error),
-                _ => StatusCode((int) HttpStatusCode.FailedDependency, result.Error)
+                _ => StatusCode((int)HttpStatusCode.FailedDependency, result.Error)
             };
         }
 

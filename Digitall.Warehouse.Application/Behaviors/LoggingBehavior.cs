@@ -33,7 +33,7 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
             {
                 _logger.LogHandledResponseFeatureMessage(featureName, response);
             }
-            
+
             return response;
         }
         catch (Exception ex)

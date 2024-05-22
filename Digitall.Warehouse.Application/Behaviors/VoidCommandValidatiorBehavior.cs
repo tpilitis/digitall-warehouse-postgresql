@@ -32,7 +32,7 @@ namespace Digitall.Warehouse.Application.Behaviors
 
             var errors = validationFailures
                 .SelectMany(validator => validator.Errors)
-                .Where(error => error != null);
+                .Where(error => error is not null);
 
             if (errors.Any())
             {
