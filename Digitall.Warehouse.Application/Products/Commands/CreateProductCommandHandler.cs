@@ -7,18 +7,11 @@ namespace Digitall.Warehouse.Application.Products.Commands
 {
     public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand>
     {
-        IProductRepository _productRepository;
-        ICategoryRepository _categoryRepository;
-        IBrandRepository _brandRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CreateProductCommandHandler(
-            IProductRepository productRepository,
-            ICategoryRepository categoryRepository,
-            IBrandRepository brandRepository)
+        public CreateProductCommandHandler(IUnitOfWork unitOfWork)
         {
-            _productRepository = productRepository;
-            _categoryRepository = categoryRepository;
-            _brandRepository = brandRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Result> Handle(
@@ -27,9 +20,9 @@ namespace Digitall.Warehouse.Application.Products.Commands
         {
             // TODO: Validator shall validate Brand does exsits;
             // TODO: Validate category does exists
-            var brandTask = _brandRepository.GetByIdAsync(request.BrandId, cancellationToken);
-            var categoriesTask = _categoryRepository.GetAllByIdsAsync(request.categoryIds, cancellationToken);
-            await Task.WhenAll(new List<Task>() { brandTask, categoriesTask});
+            var brandTask = _unitOfWork.Brands.GetByIdAsync(request.BrandId, cancellationToken);
+            var categoriesTask = _unitOfWork.Categories.GetAllByIdsAsync(request.categoryIds, cancellationToken);
+            await Task.WhenAll(new List<Task>() { brandTask, categoriesTask });
 
             var brand = await brandTask;
             var categories = await categoriesTask;
@@ -37,10 +30,12 @@ namespace Digitall.Warehouse.Application.Products.Commands
                 request.Title,
                 request.Description,
                 request.Price,
-                categories, 
+                categories,
                 brand);
 
-            await _productRepository.AddAsync(product, cancellationToken);
+            await _unitOfWork.Products.AddAsync(product, cancellationToken);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return Result.Success();
         }
