@@ -35,7 +35,6 @@ builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(AssemblyReference.Assembly);
 
-    // this below does not register the behavior ...
     config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
     config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(VoidCommandValidatiorBehavior<,>));
     config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(RequestValidatiorBehavior<,>));
