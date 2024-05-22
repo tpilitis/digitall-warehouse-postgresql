@@ -18,32 +18,30 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        var commandName = request!.GetType().Name;
-
+        var featureName = request!.GetType().Name;
         try
         {
-            _logger.LogInformation(
-                "Handling command @{CommandName} with request {Command}", commandName, request);
+            _logger.LogHandlingFeatureRequestMessage(featureName, request);
 
             var response = await next();
 
-            if (request.GetType().IsSubclassOf(typeof(IRequest<Result>)))
+            if (request!.GetType().IsSubclassOf(typeof(IRequest<Result>)))
             {
-                _logger.LogInformation("Command @{CommandName} handled.", commandName);
+                _logger.LogHandledVoidFeatureMessage(featureName);
             }
             else
             {
-                _logger.LogInformation("Command @{CommandName} handled with response: @{Response}.", commandName, response);
+                _logger.LogHandledResponseFeatureMessage(featureName, response);
             }
             
             return response;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Command {@CommandName} failed. With {@Exception}", commandName, ex);
+            _logger.LogErrorMessage(featureName, ex);
         }
 
-        // I do not expect we to reach here...
+        // we shall never reach here ...
         return await next();
     }
 }
