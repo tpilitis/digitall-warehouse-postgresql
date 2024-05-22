@@ -2,5 +2,5 @@
 
 public interface IIdentifiable<TId>
 {
-    TId Id { get; set; }
+    TId Id { get; init; }
 }

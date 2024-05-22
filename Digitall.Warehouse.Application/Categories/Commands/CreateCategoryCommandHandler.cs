@@ -22,10 +22,7 @@ namespace Digitall.Warehouse.Application.Categories.Commands
             CreateCategoryCommand request,
             CancellationToken cancellationToken)
         {
-            var category = new Category()
-            {
-                Name = request.Name,
-            };
+            var category = Category.Create(request.Name);
 
             await _categoryRepository.AddAsync(category, cancellationToken);
             await _unitOfWork.SaveChangesAsync();

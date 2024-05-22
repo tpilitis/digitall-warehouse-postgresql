@@ -2,13 +2,20 @@
 
 namespace Digitall.Warehouse.Domain.Entities.Products;
 
-public class ProductCategory(Guid id) : Entity(id)
+public class ProductCategory : Entity
 {
-    private ProductCategory() : this(Guid.NewGuid())
+    private ProductCategory(Guid productId, Guid categoryId) : base()
     {
+        ProductId = productId;
+        CategoryId = categoryId;
     }
 
-    public Guid ProductId { get; set; }
+    public Guid ProductId { get; private set; }
 
-    public Guid CategoryId { get; set; }
+    public Guid CategoryId { get; private set; }
+
+    public static ProductCategory Create(Guid productId, Guid categoryId)
+    {
+        return new ProductCategory(productId, categoryId);
+    }
 }

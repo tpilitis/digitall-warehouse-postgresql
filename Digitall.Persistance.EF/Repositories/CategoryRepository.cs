@@ -26,7 +26,7 @@ namespace Digitall.Persistance.EF.Repositories
             return category;
         }
 
-        public async Task<ICollection<Product>> GetCategoryProductsAsync(string categoryName)
+        public async Task<IReadOnlyList<Product>> GetCategoryProductsAsync(string categoryName)
         {
             var category = await DbContext
                 .Set<Category>()

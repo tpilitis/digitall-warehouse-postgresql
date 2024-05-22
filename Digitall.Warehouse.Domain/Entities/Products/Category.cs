@@ -2,13 +2,21 @@
 
 namespace Digitall.Warehouse.Domain.Entities.Products;
 
-public class Category(Guid id) : Entity(id)
+public class Category : Entity
 {
-    public Category() : this(Guid.NewGuid())
+    private HashSet<Product> _products = [];
+
+    private Category(string name) : base()
     {
+        Name = name;
     }
 
-    public string Name { get; set; } = null!;
+    public string Name { get; private set; }
 
-    public ICollection<Product> Products { get; set; } = [];
+    public IReadOnlyList<Product> Products => _products.ToList();
+
+    public static Category Create(string name)
+    {
+        return new Category(name);
+    }
 }

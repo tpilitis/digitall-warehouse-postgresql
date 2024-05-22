@@ -1,5 +1,6 @@
 ﻿using Digitall.Warehouse.Application.Abstractions.Messaging;
 using Digitall.Warehouse.Application.Abstractions.Persistence;
+using Digitall.Warehouse.Domain.Entities.Products;
 using Digitall.Warehouse.Domain.Shared;
 
 namespace Digitall.Warehouse.Application.Products.Commands
@@ -30,13 +31,14 @@ namespace Digitall.Warehouse.Application.Products.Commands
             var categoriesTask = _categoryRepository.GetAllByIdsAsync(request.categoryIds, cancellationToken);
             await Task.WhenAll(new List<Task>() { brandTask, categoriesTask});
 
-            var product = new Domain.Entities.Products.Product()
-            {
-                Brand = await brandTask,
-                Categories = await categoriesTask,
-                Title = request.Title,
-                Price = request.Price
-            };
+            var brand = await brandTask;
+            var categories = await categoriesTask;
+            var product = Product.Create(
+                request.Title,
+                request.Description,
+                request.Price,
+                categories, 
+                brand);
 
             await _productRepository.AddAsync(product, cancellationToken);
 
