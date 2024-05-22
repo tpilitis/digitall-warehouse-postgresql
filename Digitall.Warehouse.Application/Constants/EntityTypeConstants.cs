@@ -1,4 +1,4 @@
-﻿namespace Digitall.Persistance.EF.Configuration;
+﻿namespace Digitall.Warehouse.Application.Constants;
 
 public static class EntityTypeConstants
 {

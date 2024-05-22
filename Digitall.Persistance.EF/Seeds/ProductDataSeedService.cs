@@ -22,7 +22,7 @@ public class ProductDataSeedService : IDataSeedService
     {
         if (!_context.Brands.Any())
         {
-            var brand = new Brand()
+            var brand = new Brand(Guid.NewGuid())
             {
                 Name = "LFC"
             };
@@ -88,5 +88,5 @@ public class ProductDataSeedService : IDataSeedService
     }
 
     private static IEnumerable<ProductSize> SeedSizes(Dictionary<string, string> inputSizes)
-        => inputSizes.Select(kvp => new ProductSize() { Name = kvp.Key, Description = kvp.Value });
+        => inputSizes.Select(kvp => new ProductSize(Guid.NewGuid()) { Name = kvp.Key, Description = kvp.Value });
 }

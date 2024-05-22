@@ -2,9 +2,11 @@
 
 namespace Digitall.Warehouse.Domain.Entities.Products;
 
-public class ProductSize : IIdentifiable<Guid>
+public class ProductSize(Guid id) : Entity(id)
 {
-    public Guid Id { get; set; }
+    private ProductSize() : this(Guid.NewGuid())
+    {
+    }
 
     public string Name { get; set; } = null!;
 

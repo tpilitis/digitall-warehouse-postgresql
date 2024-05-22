@@ -1,4 +1,5 @@
-﻿using Digitall.Warehouse.Domain.Entities.Products;
+﻿using Digitall.Warehouse.Application.Constants;
+using Digitall.Warehouse.Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,11 +9,13 @@ public class BrandConfiguration : IEntityTypeConfiguration<Brand>
 {
     public void Configure(EntityTypeBuilder<Brand> builder)
     {
-        builder.HasKey(b => b.Id);
+        builder.HasKey(brand => brand.Id);
 
         builder
-            .Property(b => b.Name)
+            .Property(brand => brand.Name)
             .HasMaxLength(EntityTypeConstants.MaxLength255)
             .IsRequired();
+
+        builder.HasIndex(brand => brand.Name).IsUnique();
     }
 }

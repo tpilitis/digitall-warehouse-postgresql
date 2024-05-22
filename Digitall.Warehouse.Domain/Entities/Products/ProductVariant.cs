@@ -2,9 +2,11 @@
 
 namespace Digitall.Warehouse.Domain.Entities.Products;
 
-public class ProductVariant : IIdentifiable<Guid>
+public class ProductVariant(Guid id) : Entity(id)
 {
-    public Guid Id { get; set; }
+    private ProductVariant() : this(Guid.NewGuid())
+    {
+    }
 
     public Guid ProductId { get; set; }
 

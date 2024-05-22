@@ -2,9 +2,11 @@
 
 namespace Digitall.Warehouse.Domain.Entities.Products;
 
-public class Category : IIdentifiable<Guid>
+public class Category(Guid id) : Entity(id)
 {
-    public Guid Id { get; set; }
+    public Category() : this(Guid.NewGuid())
+    {
+    }
 
     public string Name { get; set; } = null!;
 

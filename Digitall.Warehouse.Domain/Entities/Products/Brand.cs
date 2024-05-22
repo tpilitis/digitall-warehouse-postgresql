@@ -1,11 +1,12 @@
 ﻿using Digitall.Warehouse.Domain.Abstraction;
-using System.ComponentModel.DataAnnotations;
 
 namespace Digitall.Warehouse.Domain.Entities.Products;
 
-public class Brand : IIdentifiable<Guid>
+public class Brand(Guid id) : Entity(id)
 {
-    public Guid Id { get; set; }
+    private Brand() : this(Guid.NewGuid())
+    {
+    }
 
     public string? Name { get; set; }
 

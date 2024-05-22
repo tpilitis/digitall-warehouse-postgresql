@@ -1,4 +1,5 @@
-﻿using Digitall.Warehouse.Domain.Entities.Products;
+﻿using Digitall.Warehouse.Application.Constants;
+using Digitall.Warehouse.Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,6 +15,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .Property(product => product.Title)
             .IsRequired()
             .HasMaxLength(EntityTypeConstants.MaxLength255);
+
+        builder.HasIndex(product => product.Title);
 
         builder
             .Property(product => product.Description)

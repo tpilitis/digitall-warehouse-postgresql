@@ -2,9 +2,11 @@
 
 namespace Digitall.Warehouse.Domain.Entities.Products;
 
-public class ProductSwatch : IIdentifiable<Guid>
+public class ProductSwatch(Guid id) : Entity(id)
 {
-    public Guid Id { get; set; }
+    private ProductSwatch(): this(Guid.NewGuid())
+    {
+    }
 
     public string Name { get; set; } = null!;
 

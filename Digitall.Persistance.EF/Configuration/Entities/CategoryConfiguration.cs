@@ -1,4 +1,5 @@
-﻿using Digitall.Warehouse.Domain.Entities.Products;
+﻿using Digitall.Warehouse.Application.Constants;
+using Digitall.Warehouse.Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,5 +15,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
             .Property(category => category.Name)
             .IsRequired()
             .HasMaxLength(EntityTypeConstants.MaxLength255);
+
+        builder.HasIndex(category => category.Name).IsUnique();
     }
 }
