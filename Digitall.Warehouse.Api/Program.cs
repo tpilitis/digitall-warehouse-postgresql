@@ -6,6 +6,7 @@ using Digitall.Warehouse.Application.Behaviors;
 using Digitall.Warehouse.Application.Categories.Commands;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Serilog.Events;
 
@@ -42,7 +43,17 @@ builder.Services.AddMediatR(config =>
 
 builder.Services.AddValidatorsFromAssemblyContaining<CreateCategoryCommandValidator>();
 
-builder.Services.AddControllers();
+var mvcBuilder = builder.Services.AddControllers();
+mvcBuilder
+    .ConfigureApiBehaviorOptions(options =>
+    {
+        options.InvalidModelStateResponseFactory = actionContext =>
+        {
+            var modelState = actionContext.ModelState.Values;
+
+            return new BadRequestObjectResult(modelState.ToErrorResponse());
+        };
+    });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
