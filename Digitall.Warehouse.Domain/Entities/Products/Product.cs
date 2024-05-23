@@ -10,16 +10,12 @@ public class Product : Entity
     private Product(
         string title,
         string description,
-        Price price,
-        ICollection<Category> categories,
-        Brand? brand)
+        Guid? brandId)
         : base()
     {
-        _categories = categories.Distinct().ToHashSet();
         Title = title;
         Description = description;
-        Price = price;
-        Brand = brand;
+        BrandId = brandId;
 
         // TODO: raise create domain event;
     }
@@ -30,9 +26,9 @@ public class Product : Entity
 
     public Brand? Brand { get; private set; }
 
-    public Guid BrandId { get; protected set; }
+    public Guid? BrandId { get; protected set; }
 
-    public Price Price { get; private set; }
+    public Price Price { get; private set; } = default!;
 
     public IReadOnlyCollection<Category> Categories => _categories;
 
@@ -42,14 +38,42 @@ public class Product : Entity
         string title,
         string description,
         Price price,
-        Category categories,
-        Brand? brand)
+        Guid? brandId,
+        Category category)
     {
-        return new Product(title, description, price, [categories], brand);
+        var product = new Product(title, description, brandId);
+
+        product.SetPrice(price);
+        product.AddCategory(category);
+
+        return product;
+    }
+
+    private void SetPrice(Price price)
+    {
+        Price = price;
+
+        // TODO: Raise D-Event
+    }
+
+    public void AddCategory(Category category)
+    {
+        if (_categories.Contains(category))
+        {
+            // we can throw a custom exception,
+            // but at this case we want to be silent - the category is already assigned to product
+            return;
+        }
+
+        _categories.Add(category);
+
+        // TODO: Raise D-Event
     }
 
     public void AddProductVariant(Guid sizeId, int quantity, Guid? swatchId)
     {
         _productVariants.Add(ProductVariant.Create(Id, sizeId, quantity, swatchId));
+
+        // TODO: Raise D-Event
     }
 }

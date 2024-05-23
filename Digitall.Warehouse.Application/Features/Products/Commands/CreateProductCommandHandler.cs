@@ -18,19 +18,14 @@ public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand>
         CreateProductCommand request,
         CancellationToken cancellationToken)
     {
-        var brandTask = _unitOfWork.Brands.GetByIdAsync(request.BrandId, cancellationToken);
-        var categoryTask = _unitOfWork.Categories.GetByIdAsync(request.CategoryId, cancellationToken);
-        await Task.WhenAll(new List<Task>() { brandTask, categoryTask });
-
-        var brand = await brandTask;
-        var category = await categoryTask;
-
+        var category = await _unitOfWork.Categories.GetByIdAsync(request.CategoryId, cancellationToken);
+        
         var product = Product.Create(
             request.Title,
             request.Description,
             request.Price,
-            category!,
-            brand);
+            request.BrandId, 
+            category!);
 
         await _unitOfWork.Products.AddAsync(product, cancellationToken);
 
