@@ -34,11 +34,9 @@ public class CategoriesController : ControllerBase
         if (result.IsFailure)
         {
             // expect and return
-            return result.Error.Code switch
-            {
-                Error.DuplicatedValueCode => BadRequest(result.Error),
-                _ => StatusCode((int)HttpStatusCode.FailedDependency, result.Error)
-            };
+            return StatusCode(
+                (int)HttpStatusCode.FailedDependency,
+                new ValidationErrorResponse(result.Error));
         }
 
         return NoContent();
