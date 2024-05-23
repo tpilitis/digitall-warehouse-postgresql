@@ -6,7 +6,7 @@ namespace Digitall.Warehouse.Application.Features.Products.Commands;
 public sealed record CreateProductCommand(
     string Title,
     string Description,
-    Guid BrandId,
+    Guid? BrandId,
     Price Price,
     Guid CategoryId)
     : ICommand;

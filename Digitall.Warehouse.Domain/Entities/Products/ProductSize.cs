@@ -16,7 +16,7 @@ public class ProductSize : Entity
 
     public string? Description { get; private set; }
 
-    public IReadOnlyCollection<ProductVariant> Variants => _productVariants.ToList();
+    public IReadOnlyCollection<ProductVariant> Variants => _productVariants;
 
     public static ProductSize Create(string name, string? description)
     {

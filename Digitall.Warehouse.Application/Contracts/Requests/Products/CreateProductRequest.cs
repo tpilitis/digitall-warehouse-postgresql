@@ -4,7 +4,7 @@ public class CreateProductRequest
 {
     public string Title { get; set; } = default!;
 
-    public string Descritpion { get; set; } = default!;
+    public string Description { get; set; } = default!;
 
     public Money Price { get; set; } = default!;
 

@@ -10,6 +10,10 @@ public class ProductCategory : Entity
         CategoryId = categoryId;
     }
 
+    protected ProductCategory() : base()
+    {
+    }
+
     public Guid ProductId { get; private set; }
 
     public Guid CategoryId { get; private set; }

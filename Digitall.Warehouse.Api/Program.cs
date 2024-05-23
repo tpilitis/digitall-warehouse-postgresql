@@ -1,3 +1,4 @@
+using AutoMapper;
 using Digitall.Persistance.EF.Extensions;
 using Digitall.Warehouse.Api.Extensions;
 using Digitall.Warehouse.Api.Infrastructure.ExceptionHandling;
@@ -42,6 +43,7 @@ builder.Services.AddMediatR(config =>
 });
 
 builder.Services.AddAutoMapper([ApplicationAssemblyReference.Assembly]);
+
 builder.Services.AddValidatorsFromAssemblyContaining<CreateCategoryCommandValidator>();
 
 var mvcBuilder = builder.Services.AddControllers();

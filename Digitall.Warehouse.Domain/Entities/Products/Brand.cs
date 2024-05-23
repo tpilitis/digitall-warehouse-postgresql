@@ -13,7 +13,7 @@ public class Brand: Entity
 
     public string? Name { get; private set; }
 
-    public IReadOnlyList<Product> Products => _products.ToList();
+    public IReadOnlyCollection<Product> Products => _products;
 
     public static Brand Create(string name)
     {

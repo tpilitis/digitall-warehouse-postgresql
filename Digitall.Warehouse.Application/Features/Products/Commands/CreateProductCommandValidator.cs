@@ -35,8 +35,7 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
             .NotEmpty()
             .MustAsync(async (id, cancellationToken) =>
             {
-                var entity = await brandRepository!.GetByIdAsync(id, cancellationToken);
-
+                var entity = await brandRepository!.GetByIdAsync(id ?? Guid.Empty, cancellationToken);
                 return entity != null;
             })
             .WithErrorCode(ValidationFailureCodes.EntityDoesNotExists)
