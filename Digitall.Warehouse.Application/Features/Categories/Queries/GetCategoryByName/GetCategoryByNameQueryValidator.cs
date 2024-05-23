@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Digitall.Warehouse.Application.Categories.Queries.GetCategoryByName
+namespace Digitall.Warehouse.Application.Features.Categories.Queries.GetCategoryByName
 {
     public class GetCategoryByNameQueryValidator : AbstractValidator<GetCategoryByNameQuery>
     {

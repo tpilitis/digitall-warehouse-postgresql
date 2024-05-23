@@ -2,7 +2,7 @@
 using Digitall.Warehouse.Application.Abstractions.Persistence;
 using Digitall.Warehouse.Domain.Shared;
 
-namespace Digitall.Warehouse.Application.Categories.Queries.GetCategoryByName
+namespace Digitall.Warehouse.Application.Features.Categories.Queries.GetCategoryByName
 {
     public class GetCategoryByNameQueryHandler(ICategoryRepository categoryRepository)
         : IQueryHandler<GetCategoryByNameQuery, GetCategoryByNameResponse>

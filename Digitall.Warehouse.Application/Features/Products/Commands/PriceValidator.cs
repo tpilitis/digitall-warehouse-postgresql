@@ -2,7 +2,7 @@
 using Digitall.Warehouse.Domain.Entities.Products;
 using FluentValidation;
 
-namespace Digitall.Warehouse.Application.Products.Commands;
+namespace Digitall.Warehouse.Application.Features.Products.Commands;
 
 public class PriceValidator : AbstractValidator<Price>
 {

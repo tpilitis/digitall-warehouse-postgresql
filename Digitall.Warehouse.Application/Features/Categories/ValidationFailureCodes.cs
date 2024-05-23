@@ -1,6 +1,6 @@
 ﻿using Digitall.Warehouse.Application.Abstractions.Messaging;
 
-namespace Digitall.Warehouse.Application.Categories;
+namespace Digitall.Warehouse.Application.Features.Categories;
 
 public class ValidationFailureCodes : FailureCode<ValidationFailureCodes>
 {

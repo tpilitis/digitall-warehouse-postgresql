@@ -1,9 +1,10 @@
 ﻿using Digitall.Warehouse.Application.Abstractions.Persistence;
-using Digitall.Warehouse.Application.Categories;
 using Digitall.Warehouse.Application.Constants;
+using Digitall.Warehouse.Application.Features.Categories;
+using Digitall.Warehouse.Application.Products.Commands;
 using FluentValidation;
 
-namespace Digitall.Warehouse.Application.Products.Commands;
+namespace Digitall.Warehouse.Application.Features.Products.Commands;
 
 public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {
