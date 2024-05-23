@@ -4,7 +4,7 @@ namespace Digitall.Warehouse.Domain.Entities.Products;
 
 public class ProductSwatch(Guid id) : Entity(id)
 {
-    private ProductSwatch(): this(Guid.NewGuid())
+    private ProductSwatch() : this(Guid.NewGuid())
     {
     }
 

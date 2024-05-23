@@ -7,14 +7,11 @@ namespace Digitall.Warehouse.Api.Infrastructure.ExceptionHandling
     public class ExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionHandlerMiddleware> _logger;
 
         public ExceptionHandlerMiddleware(
-            RequestDelegate next,
-            ILogger<ExceptionHandlerMiddleware> logger)
+            RequestDelegate next)
         {
             _next = next;
-            _logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -31,8 +28,6 @@ namespace Digitall.Warehouse.Api.Infrastructure.ExceptionHandling
 
         private async void HandleException(HttpContext context, ValidationException ex)
         {
-            _logger.LogError(ex.Message ?? "An error occured", ex);
-
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
             var response = new ValidationErrorResponse(ex.Errors);

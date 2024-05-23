@@ -32,13 +32,13 @@ public class RequestValidatiorBehavior<TRequest, TResponse> : IPipelineBehavior<
 
         var errors = validationFailures
             .SelectMany(validator => validator.Errors)
-            .Where(error => error != null);
+            .Where(error => error is not null);
 
         if (errors.Any())
         {
             throw new ValidationException(errors);
         }
-        
+
         return await next();
 
         // post

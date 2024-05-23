@@ -4,7 +4,7 @@ using Digitall.Warehouse.Domain.Shared;
 
 namespace Digitall.Warehouse.Application.Categories.Queries.GetCategoryByName
 {
-    public class GetCategoryByNameQueryHandler(ICategoryRepository categoryRepository) 
+    public class GetCategoryByNameQueryHandler(ICategoryRepository categoryRepository)
         : IQueryHandler<GetCategoryByNameQuery, GetCategoryByNameResponse>
     {
         private readonly ICategoryRepository _categoryRepository = categoryRepository;
