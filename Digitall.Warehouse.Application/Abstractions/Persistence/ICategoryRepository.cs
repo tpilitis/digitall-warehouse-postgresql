@@ -12,6 +12,6 @@ namespace Digitall.Warehouse.Application.Abstractions.Persistence
 
         Task AddAsync(Category category, CancellationToken cancellationToken);
 
-        Task<IReadOnlyList<Product>> GetCategoryProductsAsync(string categoryName);
+        Task<IReadOnlyCollection<Product>> GetCategoryProductsAsync(string categoryName);
     }
 }

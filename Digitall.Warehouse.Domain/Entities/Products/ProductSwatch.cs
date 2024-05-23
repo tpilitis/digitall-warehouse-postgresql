@@ -13,7 +13,7 @@ public class ProductSwatch : Entity
 
     public string Name { get; private set; } = null!;
 
-    public IReadOnlyList<ProductVariant> Variants => _productVariants.ToList();
+    public IReadOnlyCollection<ProductVariant> Variants => _productVariants.ToList();
 
     public static ProductSwatch Create(string name)
     {

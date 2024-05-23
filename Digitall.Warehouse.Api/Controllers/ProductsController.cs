@@ -22,7 +22,7 @@ namespace Digitall.Warehouse.Api.Controllers
             throw new NotImplementedException();
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetProductByIdAsync()
         {
             throw new NotImplementedException();

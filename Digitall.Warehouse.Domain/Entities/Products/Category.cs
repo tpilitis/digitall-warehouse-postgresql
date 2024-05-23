@@ -13,7 +13,7 @@ public class Category : Entity
 
     public string Name { get; private set; }
 
-    public IReadOnlyList<Product> Products => _products.ToList();
+    public IReadOnlyCollection<Product> Products => _products.ToList();
 
     public static Category Create(string name)
     {
