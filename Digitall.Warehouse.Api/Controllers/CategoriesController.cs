@@ -1,5 +1,6 @@
 ﻿using Digitall.Warehouse.Api.Contracts.Requests;
 using Digitall.Warehouse.Api.Infrastructure.ExceptionHandling.Models;
+using Digitall.Warehouse.Application.Contracts.Responses;
 using Digitall.Warehouse.Application.Features.Categories.Commands;
 using Digitall.Warehouse.Application.Features.Categories.Queries.GetCategoryByName;
 using Digitall.Warehouse.Domain.Shared;
@@ -62,7 +63,7 @@ public class CategoriesController : ControllerBase
                 return NotFound(new ValidationErrorResponse(result.Error));
             }
 
-            return StatusCode((int)HttpStatusCode.FailedDependency, new ValidationErrorResponse(result.Error))
+            return StatusCode((int)HttpStatusCode.FailedDependency, new ValidationErrorResponse(result.Error));
         }
 
         return Ok(result.Value);

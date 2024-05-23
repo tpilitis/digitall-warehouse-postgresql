@@ -10,5 +10,5 @@ public class CreateProductRequest
 
     public Guid CategoryId { get; set; } = default!;
 
-    public Guid? Brand { get; set; } = default!;
+    public Guid? BrandId { get; set; } = default!;
 }

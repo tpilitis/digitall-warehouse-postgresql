@@ -42,10 +42,10 @@ public class Product : Entity
         string title,
         string description,
         Price price,
-        ICollection<Category> categories,
+        Category categories,
         Brand? brand)
     {
-        return new Product(title, description, price, categories, brand);
+        return new Product(title, description, price, [categories], brand);
     }
 
     public void AddProductVariant(Guid sizeId, int quantity, Guid? swatchId)

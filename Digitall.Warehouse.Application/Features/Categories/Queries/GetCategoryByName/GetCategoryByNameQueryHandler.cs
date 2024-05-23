@@ -1,5 +1,6 @@
 ﻿using Digitall.Warehouse.Application.Abstractions.Messaging;
 using Digitall.Warehouse.Application.Abstractions.Persistence;
+using Digitall.Warehouse.Application.Contracts.Responses;
 using Digitall.Warehouse.Domain.Shared;
 
 namespace Digitall.Warehouse.Application.Features.Categories.Queries.GetCategoryByName

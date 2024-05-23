@@ -8,5 +8,5 @@ public sealed record CreateProductCommand(
     string Description,
     Guid BrandId,
     Price Price,
-    List<Guid> CategoryIds)
+    Guid CategoryId)
     : ICommand;

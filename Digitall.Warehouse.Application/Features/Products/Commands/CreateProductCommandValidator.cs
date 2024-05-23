@@ -20,16 +20,16 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
             .NotNull()
             .SetValidator(new PriceValidator());
 
-        RuleFor(command => command.CategoryIds)
+        RuleFor(command => command.CategoryId)
             .NotEmpty()
-            .MustAsync(async (ids, cancellationToken) =>
+            .MustAsync(async (id, cancellationToken) =>
             {
-                var categories = await categoryRepository!.GetAllByIdsAsync(ids, cancellationToken);
+                var category = await categoryRepository!.GetByIdAsync(id, cancellationToken);
 
-                return categories != null && categories.ToList().Count == ids.Count;
+                return category != null;
             })
-            .WithErrorCode(ValidationFailureCodes.CategoriesContainNotFoundId.Name)
-            .WithMessage(ValidationFailureCodes.CategoriesContainNotFoundId.Value);
+            .WithErrorCode(ValidationFailureCodes.CategoryNotFound.Name)
+            .WithMessage(ValidationFailureCodes.CategoryNotFound.Value);
 
         RuleFor(command => command.BrandId)
             .NotEmpty()

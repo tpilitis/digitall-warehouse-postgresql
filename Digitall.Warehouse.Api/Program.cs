@@ -34,13 +34,14 @@ builder.Services.AddPersistanceEF(builder.Configuration);
 
 builder.Services.AddMediatR(config =>
 {
-    config.RegisterServicesFromAssembly(AssemblyReference.Assembly);
+    config.RegisterServicesFromAssembly(ApplicationAssemblyReference.Assembly);
 
     config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
     config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(VoidCommandValidatiorBehavior<,>));
     config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(RequestValidatiorBehavior<,>));
 });
 
+builder.Services.AddAutoMapper([ApplicationAssemblyReference.Assembly]);
 builder.Services.AddValidatorsFromAssemblyContaining<CreateCategoryCommandValidator>();
 
 var mvcBuilder = builder.Services.AddControllers();
