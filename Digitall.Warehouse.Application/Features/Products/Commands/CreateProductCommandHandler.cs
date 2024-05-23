@@ -18,10 +18,8 @@ public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand>
         CreateProductCommand request,
         CancellationToken cancellationToken)
     {
-        // TODO: Validator shall validate Brand does exsits;
-        // TODO: Validate category does exists
         var brandTask = _unitOfWork.Brands.GetByIdAsync(request.BrandId, cancellationToken);
-        var categoriesTask = _unitOfWork.Categories.GetAllByIdsAsync(request.categoryIds, cancellationToken);
+        var categoriesTask = _unitOfWork.Categories.GetAllByIdsAsync(request.CategoryIds, cancellationToken);
         await Task.WhenAll(new List<Task>() { brandTask, categoriesTask });
 
         var brand = await brandTask;

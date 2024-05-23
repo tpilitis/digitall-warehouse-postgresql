@@ -1,6 +1,6 @@
 ﻿using Digitall.Warehouse.Api.Contracts.Requests;
-using Digitall.Warehouse.Application.Categories.Commands;
-using Digitall.Warehouse.Application.Categories.Queries.GetCategoryByName;
+using Digitall.Warehouse.Application.Features.Categories.Commands;
+using Digitall.Warehouse.Application.Features.Categories.Queries.GetCategoryByName;
 using Digitall.Warehouse.Domain.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
