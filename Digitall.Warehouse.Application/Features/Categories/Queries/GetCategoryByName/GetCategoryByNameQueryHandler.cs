@@ -13,11 +13,6 @@ namespace Digitall.Warehouse.Application.Features.Categories.Queries.GetCategory
             GetCategoryByNameQuery request,
             CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(request.Name))
-            {
-                return Result.Failure<GetCategoryByNameResponse>(Error.RequiredValue(nameof(request.Name)));
-            }
-
             var category = await _categoryRepository.GetByNameAsync(request.Name);
             if (category == null)
             {
