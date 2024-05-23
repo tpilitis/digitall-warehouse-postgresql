@@ -47,4 +47,9 @@ public class Product : Entity
     {
         return new Product(title, description, price, categories, brand);
     }
+
+    public void AddProductVariant(Guid sizeId, int quantity, Guid? swatchId)
+    {
+        _productVariants.Add(ProductVariant.Create(Id, sizeId, quantity, swatchId));
+    }
 }
