@@ -1,4 +1,6 @@
-﻿namespace Digitall.Warehouse.Api.Contracts.Requests.Products;
+﻿using Digitall.Warehouse.Application.Contracts.Shared;
+
+namespace Digitall.Warehouse.Api.Contracts.Requests.Products;
 
 public class CreateProductRequest
 {
