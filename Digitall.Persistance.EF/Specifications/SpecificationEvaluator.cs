@@ -19,7 +19,7 @@ namespace Digitall.Persistance.EF.Specifications
 
             queryable = specification.Includes.Aggregate(queryable, (current, include) =>
             {
-               return current.Include(include);
+                return current.Include(include);
             });
 
             if (specification.OrderByExpression is not null)
@@ -34,6 +34,16 @@ namespace Digitall.Persistance.EF.Specifications
             if (specification.AsNoTracking)
             {
                 queryable = queryable.AsNoTracking();
+            }
+
+            if (specification.Skip.HasValue)
+            {
+                queryable = queryable.Skip(specification.Skip.Value);
+            }
+
+            if (specification.Take.HasValue)
+            {
+                queryable = queryable.Take(specification.Take.Value);
             }
 
             return queryable;

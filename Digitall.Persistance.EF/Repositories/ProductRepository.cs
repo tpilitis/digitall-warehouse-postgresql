@@ -3,7 +3,6 @@ using Digitall.Persistance.EF.Specifications.Products;
 using Digitall.Warehouse.Application.Abstractions.Persistence;
 using Digitall.Warehouse.Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Digitall.Persistance.EF.Repositories
 {
@@ -15,13 +14,11 @@ namespace Digitall.Persistance.EF.Repositories
             DbContext.Set<Product>().Remove(product);
         }
 
-        public async Task<ICollection<Product>> GetProductsByTitleAsync(string title)
+        public async Task<ICollection<Product>> GetProductsByTitleAsync(string title, int skip, int take, CancellationToken cancellationToken)
         {
-            return await DbContext
-                .Set<Product>()
-                .AsNoTracking()
-                .Where(product => product.Title.Contains(title))
-                .ToListAsync();
+            var getProductsByTitleSpecification = new GetProductsByTitleSpecification(title, skip, take);
+            return await ApplySpecification(getProductsByTitleSpecification)
+                .ToListAsync(cancellationToken);
         }
 
         public async Task<Product?> GetByIdWithBrandAsync(Guid productId, CancellationToken cancellationToken)

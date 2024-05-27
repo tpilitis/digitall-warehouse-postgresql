@@ -9,6 +9,8 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
 {
     public CreateProductCommandValidator(ICategoryRepository categoryRepository, IBrandRepository brandRepository)
     {
+        ClassLevelCascadeMode = CascadeMode.Stop;
+
         RuleFor(command => command.Title)
             .NotEmpty();
 
