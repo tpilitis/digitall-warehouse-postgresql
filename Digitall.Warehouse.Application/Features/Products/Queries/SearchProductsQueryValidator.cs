@@ -3,13 +3,13 @@ using FluentValidation;
 
 namespace Digitall.Warehouse.Application.Features.Products.Queries
 {
-    public class GetProductsQueryValidator : AbstractValidator<GetProductsQuery>
+    public class SearchProductsQueryValidator : AbstractValidator<SearchProductsQuery>
     {
-        public GetProductsQueryValidator()
+        public SearchProductsQueryValidator()
         {
             ClassLevelCascadeMode = CascadeMode.Stop;
 
-            RuleFor(query => query.Title)
+            RuleFor(query => query.Keyword)
                 .NotEmpty()
                 .MinimumLength(EntityTypeConstants.MinTitleLength)
                 .MaximumLength(EntityTypeConstants.MaxLength255);

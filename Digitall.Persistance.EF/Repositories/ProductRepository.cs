@@ -14,9 +14,9 @@ namespace Digitall.Persistance.EF.Repositories
             DbContext.Set<Product>().Remove(product);
         }
 
-        public async Task<ICollection<Product>> GetProductsByTitleAsync(string title, int skip, int take, CancellationToken cancellationToken)
+        public async Task<ICollection<Product>> SearchProductsAsync(string title, int skip, int take, CancellationToken cancellationToken)
         {
-            var getProductsByTitleSpecification = new GetProductsByTitleSpecification(title, skip, take);
+            var getProductsByTitleSpecification = new SearchProductsSpecification(title, skip, take);
             return await ApplySpecification(getProductsByTitleSpecification)
                 .ToListAsync(cancellationToken);
         }

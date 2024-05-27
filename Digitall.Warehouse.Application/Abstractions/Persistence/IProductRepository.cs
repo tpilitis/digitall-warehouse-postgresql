@@ -10,7 +10,7 @@ namespace Digitall.Warehouse.Application.Abstractions.Persistence
 
         Task AddAsync(Product product, CancellationToken cancellationToken);
 
-        Task<ICollection<Product>> GetProductsByTitleAsync(string title, int skip, int take, CancellationToken cancellationToken);
+        Task<ICollection<Product>> SearchProductsAsync(string title, int skip, int take, CancellationToken cancellationToken);
 
         void Remove(Product product);
     }

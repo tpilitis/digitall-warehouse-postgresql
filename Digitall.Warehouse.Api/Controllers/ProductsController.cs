@@ -27,12 +27,12 @@ namespace Digitall.Warehouse.Api.Controllers
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(List<GetProductResponse>))]
         public async Task<IActionResult> GetProductsAsync(
-            [FromQuery] string title,
+            [FromQuery] string keyword,
             CancellationToken cancellationToken,
             [FromQuery] int? skip = 0,
             [FromQuery] int? take = 50)
         {
-            var getProductsQuery = new GetProductsQuery(title, skip!.Value, take!.Value);
+            var getProductsQuery = new SearchProductsQuery(keyword, skip!.Value, take!.Value);
             var result = await _sender.Send(getProductsQuery, cancellationToken);
 
             return Ok(result.Value);
