@@ -20,8 +20,9 @@ namespace Digitall.Persistance.EF.Repositories
 
         public async Task<TEntity?> GetByIdAsync(Guid entityId, CancellationToken cancellationToken)
         {
-            return await DbContext.Set<TEntity>()
-                .SingleOrDefaultAsync(entity => entity.Id == entityId);
+            return await DbContext
+                .Set<TEntity>()
+                .SingleOrDefaultAsync(entity => entity.Id == entityId, cancellationToken);
         }
     }
 }

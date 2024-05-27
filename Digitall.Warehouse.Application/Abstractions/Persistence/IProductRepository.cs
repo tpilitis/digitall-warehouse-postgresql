@@ -6,6 +6,8 @@ namespace Digitall.Warehouse.Application.Abstractions.Persistence
     {
         Task<Product?> GetByIdAsync(Guid productId, CancellationToken cancellationToken);
 
+        Task<Product?> GetByIdWithBrandAsync(Guid productId, CancellationToken cancellationToken);
+
         Task AddAsync(Product product, CancellationToken cancellationToken);
 
         Task<ICollection<Product>> GetProductsByTitleAsync(string title);
