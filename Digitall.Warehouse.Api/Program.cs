@@ -1,9 +1,9 @@
-using AutoMapper;
 using Digitall.Persistance.EF.Extensions;
 using Digitall.Warehouse.Api.Extensions;
 using Digitall.Warehouse.Api.Infrastructure.ExceptionHandling;
 using Digitall.Warehouse.Application;
 using Digitall.Warehouse.Application.Behaviors;
+using Digitall.Warehouse.Application.Extensions;
 using Digitall.Warehouse.Application.Features.Categories.Commands;
 using FluentValidation;
 using MediatR;
@@ -33,6 +33,7 @@ builder.Services.AddSerilog((serviceProvider, loggerConfiguration) =>
 // Add services to the container.
 builder.Services.AddPersistanceEF(builder.Configuration);
 
+builder.Services.AddApplicationServices();
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(ApplicationAssemblyReference.Assembly);

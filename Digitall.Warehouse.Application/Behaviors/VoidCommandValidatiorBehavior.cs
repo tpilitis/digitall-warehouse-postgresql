@@ -1,17 +1,23 @@
-﻿using Digitall.Warehouse.Domain.Shared;
+﻿using Digitall.Warehouse.Application.Abstractions;
+using Digitall.Warehouse.Domain.Shared;
 using FluentValidation;
 using MediatR;
 
 namespace Digitall.Warehouse.Application.Behaviors
 {
-    public class VoidCommandValidatiorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class VoidCommandValidatiorBehavior<TRequest, TResponse>
+        : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<Result>
     {
         IEnumerable<IValidator<TRequest>> _validators;
+        IValidationService _validationService;
 
-        public VoidCommandValidatiorBehavior(IEnumerable<IValidator<TRequest>> validators)
+        public VoidCommandValidatiorBehavior(
+            IEnumerable<IValidator<TRequest>> validators,
+            IValidationService validationService)
         {
             _validators = validators;
+            _validationService = validationService;
         }
 
         public async Task<TResponse> Handle(
@@ -20,20 +26,8 @@ namespace Digitall.Warehouse.Application.Behaviors
             CancellationToken cancellationToken)
         {
             // pre
-            if (!_validators.Any())
-            {
-                return await next();
-            }
-
-            var context = new ValidationContext<TRequest>(request);
-            var validationFailures = await Task
-                .WhenAll(
-                    _validators.Select(validator => validator.ValidateAsync(context, cancellationToken)));
-
-            var errors = validationFailures
-                .SelectMany(validator => validator.Errors)
-                .Where(error => error is not null);
-
+            var errors = await _validationService.ValidateRequestAsync(request, _validators, cancellationToken);
+            
             if (errors.Any())
             {
                 throw new ValidationException(errors);
