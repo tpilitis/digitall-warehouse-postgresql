@@ -6,12 +6,15 @@ using Digitall.Warehouse.Domain.Shared;
 
 namespace Digitall.Warehouse.Application.Features.Products.Queries;
 
-public class SearchProductsQueryHandler(IProductRepository productRepository, IMapper mapper) : IQueryHandler<SearchProductsQuery, List<GetProductResponse>>
+public class SearchProductsQueryHandler(IProductRepository productRepository, IMapper mapper)
+    : IQueryHandler<SearchProductsQuery, PaginatedResponseT<GetProductResponse>>
 {
     private IProductRepository _productRepository = productRepository;
     private IMapper _mapper = mapper;
 
-    public async Task<Result<List<GetProductResponse>>> Handle(SearchProductsQuery request, CancellationToken cancellationToken)
+    public async Task<Result<PaginatedResponseT<GetProductResponse>>> Handle(
+        SearchProductsQuery request,
+        CancellationToken cancellationToken)
     {
         var products = await _productRepository.SearchProductsAsync(
             request.Keyword,
@@ -25,6 +28,8 @@ public class SearchProductsQueryHandler(IProductRepository productRepository, IM
             productResponse = products.Select(_mapper.Map<GetProductResponse>).ToList();
         }
 
-        return Result.Success(productResponse);
+        var paginatedResponse = new PaginatedResponseT<GetProductResponse>(productResponse);
+
+        return Result.Success(paginatedResponse);
     }
 }

@@ -25,7 +25,7 @@ namespace Digitall.Warehouse.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(List<GetProductResponse>))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(PaginatedResponseT<GetProductResponse>))]
         public async Task<IActionResult> GetProductsAsync(
             [FromQuery] string keyword,
             CancellationToken cancellationToken,
