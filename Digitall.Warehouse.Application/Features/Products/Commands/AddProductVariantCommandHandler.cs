@@ -12,11 +12,6 @@ public class AddProductVariantCommandHandler(IUnitOfWork unitOfWork) : ICommandH
     {
         var product = await _unitOfWork.Products.GetByIdAsync(request.ProductId, cancellationToken);
 
-        if (product == null)
-        {
-            return Result.Failure(new Error(ErrorType.ResourceNotFound.Name, ErrorType.ResourceNotFound.Value));
-        }
-
         product.AddProductVariant(request.SizeId, request.Quantity, request.SwatchId);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);

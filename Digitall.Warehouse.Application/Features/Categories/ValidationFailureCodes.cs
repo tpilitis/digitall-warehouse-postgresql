@@ -8,6 +8,9 @@ public class ValidationFailureCodes : FailureCode<ValidationFailureCodes>
     public static readonly ValidationFailureCodes CategoryNotFound = new(nameof(CategoryNotFound), "Category cannot be found.");
     public static readonly ValidationFailureCodes EntityDoesNotExists = new(nameof(EntityDoesNotExists), "Entity does not exists");
     public static readonly ValidationFailureCodes IdentifierCannotBeEmpty = new(nameof(IdentifierCannotBeEmpty), "Identifier cannot be empty");
+    public static readonly ValidationFailureCodes ProductNotFound = new(nameof(ProductNotFound), "Product cannot be found.");
+    public static readonly ValidationFailureCodes SwatchNotFound = new(nameof(SwatchNotFound), "Swatch cannot be found.");
+    public static readonly ValidationFailureCodes SizeNotFound = new(nameof(SizeNotFound), "Size cannot be found.");
 
     public ValidationFailureCodes(string code, string message)
     : base(code, message)
