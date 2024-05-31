@@ -1,13 +1,7 @@
-﻿namespace Digitall.Warehouse.Application.Contracts.Responses
-{
-    public class PaginatedResponseT<TResponseItem>
-        where TResponseItem : class
-    {
-        public PaginatedResponseT(List<TResponseItem> items)
-        {
-            Items = items;
-        }
+﻿namespace Digitall.Warehouse.Application.Contracts.Responses;
 
-        public List<TResponseItem> Items { get; set; } = [];
-    }
+public class PaginatedResponseT<TResponseItem>(List<TResponseItem> items)
+    where TResponseItem : class
+{
+    public List<TResponseItem> Items { get; set; } = items;
 }

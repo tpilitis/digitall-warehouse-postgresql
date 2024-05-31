@@ -1,5 +1,6 @@
 ﻿using Digitall.Warehouse.Application.Abstractions.Persistence;
 using Digitall.Warehouse.Application.Features.Categories;
+using Digitall.Warehouse.Application.Features.Products.Extensions;
 using FluentValidation;
 
 namespace Digitall.Warehouse.Application.Features.Products.Commands
@@ -14,14 +15,7 @@ namespace Digitall.Warehouse.Application.Features.Products.Commands
             ClassLevelCascadeMode = CascadeMode.Stop;
 
             RuleFor(command => command.ProductId)
-                .NotEmpty()
-                .MustAsync(async (pId, cancellationToken) =>
-                {
-                    var product = await productRepository.GetByIdAsync(pId, cancellationToken);
-                    return product != null;
-                })
-                .WithErrorCode(ValidationFailureCodes.ProductNotFound.Name)
-                .WithMessage(ValidationFailureCodes.ProductNotFound.Value);
+                .ProductMustExist(productRepository);
 
             RuleFor(command => command.SwatchId)
                 .NotEmpty()

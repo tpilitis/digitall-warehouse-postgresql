@@ -6,16 +6,11 @@ using Digitall.Warehouse.Domain.Shared;
 
 namespace Digitall.Warehouse.Application.Features.Products.Queries;
 
-public class GetProductQueryHandler : IQueryHandler<GetProductQuery, GetProductResponse>
+public class GetProductQueryHandler(IProductRepository productRepository, IMapper mapper)
+    : IQueryHandler<GetProductQuery, GetProductResponse>
 {
-    private IProductRepository _productRepository;
-    private IMapper _mapper;
-
-    public GetProductQueryHandler(IProductRepository productRepository, IMapper mapper)
-    {
-        _productRepository = productRepository;
-        _mapper = mapper;
-    }
+    private IProductRepository _productRepository = productRepository;
+    private IMapper _mapper = mapper;
 
     public async Task<Result<GetProductResponse>> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {

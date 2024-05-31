@@ -2,7 +2,7 @@
 
 namespace Digitall.Warehouse.Application.Contracts.Responses;
 
-public record GetProductResponse(
+public sealed record GetProductResponse(
     string Title,
     string Description,
     Money Price,
