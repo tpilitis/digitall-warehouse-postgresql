@@ -18,7 +18,7 @@ namespace Digitall.Warehouse.Application.Features.Products.Queries
         {
             var productVariants = await _productVariantRepository.GetVariantsAsync(request.ProductId, cancellationToken);
 
-            List<GetProductVariantResponse> productVariantsResponse = productVariants ?? []
+            List<GetProductVariantResponse> productVariantsResponse = productVariants == null ? []
                 : productVariants!.Select(_mapper.Map<GetProductVariantResponse>).ToList();
 
             return Result.Success(productVariantsResponse);
