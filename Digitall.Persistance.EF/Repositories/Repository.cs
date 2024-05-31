@@ -3,11 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Digitall.Persistance.EF.Repositories
 {
-    public abstract class Repository<TEntity>(WarehouseDbContext dbContext)
+    public abstract class Repository<TEntity>(WarehouseDbContext dbContext) : RepositoryBase<TEntity>(dbContext)
         where TEntity : Entity
     {
-        protected readonly WarehouseDbContext DbContext = dbContext;
-
         public async Task AddAsync(TEntity entity, CancellationToken cancellationToken)
         {
             await DbContext.Set<TEntity>().AddAsync(entity, cancellationToken);

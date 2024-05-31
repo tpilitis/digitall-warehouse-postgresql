@@ -1,5 +1,4 @@
-﻿using Digitall.Persistance.EF.Specifications;
-using Digitall.Persistance.EF.Specifications.Products;
+﻿using Digitall.Persistance.EF.Specifications.Products;
 using Digitall.Warehouse.Application.Abstractions.Persistence;
 using Digitall.Warehouse.Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
@@ -27,11 +26,6 @@ namespace Digitall.Persistance.EF.Repositories
          
             return await ApplySpecification(getByIdWithBrandSpecification)
                 .FirstOrDefaultAsync(cancellationToken);
-        }
-
-        private IQueryable<Product> ApplySpecification(Specification<Product> specification)
-        {
-            return SpecificationEvaluator.GetQuery(DbContext.Set<Product>(), specification);
         }
     }
 }
