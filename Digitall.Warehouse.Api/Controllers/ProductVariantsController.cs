@@ -37,9 +37,11 @@ public class ProductVariantsController : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.FailedDependency, Type = typeof(ValidationErrorResponse))]
     [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ValidationErrorResponse))]
-    public async Task<IActionResult> AddProductVariantAsync(ProductVariantRequest productVariantRequest)
+    public async Task<IActionResult> AddProductVariantAsync([FromRoute] Guid id, ProductVariantRequest productVariantRequest)
     {
+        productVariantRequest.SetProductId(id);
         var createProductVariantCommand = _mapper.Map<AddProductVariantCommand>(productVariantRequest);
+
         var result  = await _sender.Send(createProductVariantCommand);
         
         if (result.IsFailure)
