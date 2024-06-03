@@ -21,6 +21,7 @@ public class ProductVariantToGetProductVariantResponseProfile : Profile
             .ForCtorParam(nameof(SizeDto.Description), opt => opt.MapFrom(src => src.Description));
 
         CreateMap<ProductSwatch, SwatchDto>()
-            .ForCtorParam(nameof(SwatchDto.Id), opt => opt.MapFrom(src => src.Id));
+            .ForCtorParam(nameof(SwatchDto.Id), opt => opt.MapFrom(src => src.Id))
+            .ForCtorParam(nameof(SwatchDto.Name), opt => opt.MapFrom(src => src.Name));
     }
 }
