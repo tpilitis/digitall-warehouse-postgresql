@@ -41,9 +41,10 @@ public class ProductVariantsController : ControllerBase
     {
         var createProductVariantCommand = _mapper.Map<AddProductVariantCommand>(productVariantRequest);
         var result  = await _sender.Send(createProductVariantCommand);
+        
         if (result.IsFailure)
         {
-            return StatusCode((int) HttpStatusCode.FailedDependency, new ValidationErrorResponse(result.Error))
+            return StatusCode((int)HttpStatusCode.FailedDependency, new ValidationErrorResponse(result.Error));
         }
 
         return NoContent();
