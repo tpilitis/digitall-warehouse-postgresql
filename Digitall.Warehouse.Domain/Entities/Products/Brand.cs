@@ -2,13 +2,21 @@
 
 namespace Digitall.Warehouse.Domain.Entities.Products;
 
-public class Brand(Guid id) : Entity(id)
+public class Brand: Entity
 {
-    private Brand() : this(Guid.NewGuid())
+    private HashSet<Product> _products = [];
+
+    private Brand(string name) : base()
     {
+        Name = name;
     }
 
-    public string? Name { get; set; }
+    public string? Name { get; private set; }
 
-    public ICollection<Product> Products { get; set; } = new List<Product>();
+    public IReadOnlyCollection<Product> Products => _products;
+
+    public static Brand Create(string name)
+    {
+        return new Brand(name);
+    }
 }

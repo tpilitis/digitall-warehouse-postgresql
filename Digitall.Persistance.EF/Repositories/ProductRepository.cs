@@ -16,8 +16,19 @@ namespace Digitall.Persistance.EF.Repositories
         {
             return await DbContext
                 .Set<Product>()
+                .AsNoTracking()
                 .Where(product => product.Title.Contains(title))
                 .ToListAsync();
+        }
+
+        public async Task<Product?> GetByIdWithBrandAsync(Guid productId, CancellationToken cancellationToken)
+        {
+            return await DbContext
+                .Set<Product>()
+                .AsNoTracking()
+                .Include(product => product.Brand)
+                .Where(product => product.Id == productId)
+                .FirstOrDefaultAsync(cancellationToken);
         }
     }
 }

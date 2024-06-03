@@ -79,7 +79,7 @@ namespace Digitall.Persistance.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BrandId")
+                    b.Property<Guid?>("BrandId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -221,7 +221,7 @@ namespace Digitall.Persistance.EF.Migrations
                     b.Property<Guid>("SizeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("SwatchId")
+                    b.Property<Guid?>("SwatchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -239,9 +239,7 @@ namespace Digitall.Persistance.EF.Migrations
                 {
                     b.HasOne("Digitall.Warehouse.Domain.Entities.Products.Brand", "Brand")
                         .WithMany("Products")
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BrandId");
 
                     b.Navigation("Brand");
                 });
@@ -277,9 +275,7 @@ namespace Digitall.Persistance.EF.Migrations
 
                     b.HasOne("Digitall.Warehouse.Domain.Entities.Products.ProductSwatch", "Swatch")
                         .WithMany("Variants")
-                        .HasForeignKey("SwatchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SwatchId");
 
                     b.Navigation("Size");
 

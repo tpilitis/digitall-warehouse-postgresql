@@ -1,9 +1,10 @@
+using AutoMapper;
 using Digitall.Persistance.EF.Extensions;
 using Digitall.Warehouse.Api.Extensions;
 using Digitall.Warehouse.Api.Infrastructure.ExceptionHandling;
 using Digitall.Warehouse.Application;
 using Digitall.Warehouse.Application.Behaviors;
-using Digitall.Warehouse.Application.Categories.Commands;
+using Digitall.Warehouse.Application.Features.Categories.Commands;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -34,12 +35,14 @@ builder.Services.AddPersistanceEF(builder.Configuration);
 
 builder.Services.AddMediatR(config =>
 {
-    config.RegisterServicesFromAssembly(AssemblyReference.Assembly);
+    config.RegisterServicesFromAssembly(ApplicationAssemblyReference.Assembly);
 
     config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
     config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(VoidCommandValidatiorBehavior<,>));
     config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(RequestValidatiorBehavior<,>));
 });
+
+builder.Services.AddAutoMapper([ApplicationAssemblyReference.Assembly]);
 
 builder.Services.AddValidatorsFromAssemblyContaining<CreateCategoryCommandValidator>();
 

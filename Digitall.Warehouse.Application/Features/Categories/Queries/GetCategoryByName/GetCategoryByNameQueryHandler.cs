@@ -1,8 +1,9 @@
 ﻿using Digitall.Warehouse.Application.Abstractions.Messaging;
 using Digitall.Warehouse.Application.Abstractions.Persistence;
+using Digitall.Warehouse.Application.Contracts.Responses;
 using Digitall.Warehouse.Domain.Shared;
 
-namespace Digitall.Warehouse.Application.Categories.Queries.GetCategoryByName
+namespace Digitall.Warehouse.Application.Features.Categories.Queries.GetCategoryByName
 {
     public class GetCategoryByNameQueryHandler(ICategoryRepository categoryRepository)
         : IQueryHandler<GetCategoryByNameQuery, GetCategoryByNameResponse>
@@ -13,11 +14,6 @@ namespace Digitall.Warehouse.Application.Categories.Queries.GetCategoryByName
             GetCategoryByNameQuery request,
             CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(request.Name))
-            {
-                return Result.Failure<GetCategoryByNameResponse>(Error.RequiredValue(nameof(request.Name)));
-            }
-
             var category = await _categoryRepository.GetByNameAsync(request.Name);
             if (category == null)
             {

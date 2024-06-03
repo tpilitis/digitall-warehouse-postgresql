@@ -2,13 +2,21 @@
 
 namespace Digitall.Warehouse.Domain.Entities.Products;
 
-public class ProductSwatch(Guid id) : Entity(id)
+public class ProductSwatch : Entity
 {
-    private ProductSwatch() : this(Guid.NewGuid())
+    private HashSet<ProductVariant> _productVariants = [];
+
+    private ProductSwatch(string name): base()
     {
+        Name = name;
     }
 
-    public string Name { get; set; } = null!;
+    public string Name { get; private set; } = null!;
 
-    public ICollection<ProductVariant> Variants { get; set; } = [];
+    public IReadOnlyCollection<ProductVariant> Variants => _productVariants;
+
+    public static ProductSwatch Create(string name)
+    {
+        return new ProductSwatch(name);
+    }
 }
