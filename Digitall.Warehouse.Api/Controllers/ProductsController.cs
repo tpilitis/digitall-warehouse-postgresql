@@ -49,7 +49,6 @@ namespace Digitall.Warehouse.Api.Controllers
 
             if (result.IsFailure)
             {
-
                 ErrorType.TryFromValue(result.Error.Code, out var errorType);
                 if (errorType != null && errorType == ErrorType.ResourceNotFound)
                 {
