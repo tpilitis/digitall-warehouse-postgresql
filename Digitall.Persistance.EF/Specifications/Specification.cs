@@ -9,7 +9,7 @@ namespace Digitall.Persistance.EF.Specifications
 
         public Expression<Func<TEntity, bool>>? Criteria { get; } = criteria;
 
-        public List<Expression<Func<TEntity, object>>> Includes { get; private set; } = [];
+        public List<Expression<Func<TEntity, object?>>> Includes { get; private set; } = [];
 
         public Expression<Func<TEntity, object>>? OrderByExpression { get; private set; }
 
@@ -21,7 +21,9 @@ namespace Digitall.Persistance.EF.Specifications
 
         public int? Skip { get; set; }
 
-        protected void AddInclude(Expression<Func<TEntity, object>> include)
+        public bool AsSplitQuery { get; set; }
+
+        protected void AddInclude(Expression<Func<TEntity, object?>> include)
             => Includes.Add(include);
 
         protected void AddOrderBy(Expression<Func<TEntity, object>> orderBy)

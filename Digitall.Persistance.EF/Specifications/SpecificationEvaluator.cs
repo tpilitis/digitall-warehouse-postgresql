@@ -12,6 +12,11 @@ namespace Digitall.Persistance.EF.Specifications
         {
             var queryable = inputQueryable.AsQueryable();
 
+            if (specification.AsSplitQuery)
+            {
+                queryable = queryable.AsSplitQuery();
+            }
+
             if (specification.Criteria is not null)
             {
                 queryable = queryable.Where(specification.Criteria);
