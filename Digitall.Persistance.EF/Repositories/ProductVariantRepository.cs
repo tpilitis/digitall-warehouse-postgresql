@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Digitall.Persistance.EF.Repositories
 {
     public class ProductVariantRepository(WarehouseDbContext dbContext) 
-        : RepositoryBase<ProductVariant>(dbContext), IProductVariantRepository
+        : Repository<ProductVariant>(dbContext), IProductVariantRepository
     {
         public Task<List<ProductVariant>> GetVariantsAsync(Guid productId, CancellationToken cancellationToken)
         {

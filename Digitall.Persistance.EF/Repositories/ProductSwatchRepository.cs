@@ -3,10 +3,8 @@ using Digitall.Warehouse.Domain.Entities.Products;
 
 namespace Digitall.Persistance.EF.Repositories
 {
-    public class ProductSwatchRepository : Repository<ProductSwatch>, IProductSwatchRepository
+    public class ProductSwatchRepository(WarehouseDbContext dbContext)
+        : Repository<ProductSwatch>(dbContext), IProductSwatchRepository
     {
-        public ProductSwatchRepository(WarehouseDbContext dbContext) : base(dbContext)
-        {
-        }
     }
 }
