@@ -18,11 +18,15 @@ namespace Digitall.Warehouse.Application.Features.Products.Commands
                 .ProductMustExist(productRepository);
 
             RuleFor(command => command.SwatchId)
-                .NotEmpty()
                 .MustAsync(async (sId, cancellationToken) =>
                 {
-                    var swatch = await swatchRepository.GetByIdAsync(sId!.Value, cancellationToken);
-                    return swatch != null;
+                    if (sId.HasValue)
+                    {
+                        var swatch = await swatchRepository.GetByIdAsync(sId!.Value, cancellationToken);
+                        return swatch != null;
+                    }
+
+                    return true;
                 })
                 .WithErrorCode(ValidationFailureCodes.SwatchNotFound.Name)
                 .WithMessage(ValidationFailureCodes.SwatchNotFound.Value);
@@ -36,6 +40,11 @@ namespace Digitall.Warehouse.Application.Features.Products.Commands
                })
                .WithErrorCode(ValidationFailureCodes.SizeNotFound.Name)
                .WithMessage(ValidationFailureCodes.SizeNotFound.Value);
+
+            RuleFor(command => command.Quantity)
+                .GreaterThan(0)
+                .WithErrorCode(ValidationFailureCodes.QuantityGreaterThanZero.Name)
+                .WithMessage(ValidationFailureCodes.QuantityGreaterThanZero.Value);
         }
     }
 }

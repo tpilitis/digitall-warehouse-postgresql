@@ -13,7 +13,7 @@ namespace Digitall.Warehouse.Application.Features.Products.Extensions
             where TRequest : IBaseRequest
         {
            return ruleBuilder
-                .NotEmpty()
+                .MustNotEmpty()
                 .MustAsync(async (pId, cancellationToken) =>
                 {
                     var product = await productRepository.GetByIdAsync(pId, cancellationToken);
@@ -21,6 +21,17 @@ namespace Digitall.Warehouse.Application.Features.Products.Extensions
                 })
                 .WithErrorCode(ValidationFailureCodes.ProductNotFound.Name)
                 .WithMessage(ValidationFailureCodes.ProductNotFound.Value);
+        }
+
+        public static IRuleBuilder<TRequest, Guid> MustNotEmpty<TRequest>(this IRuleBuilder<TRequest, Guid> ruleBuilder)
+        {
+            return ruleBuilder
+                .Must((gId) =>
+                {
+                    return gId != Guid.Empty;
+                })
+                .WithErrorCode(ValidationFailureCodes.RequiredId.Name)
+                .WithMessage(ValidationFailureCodes.RequiredId.Value);
         }
     }
 }

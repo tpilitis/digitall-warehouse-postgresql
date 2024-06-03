@@ -12,7 +12,7 @@ public class AddProductVariantCommandHandler(IUnitOfWork unitOfWork) : ICommandH
     {
         var product = await _unitOfWork.Products.GetByIdAsync(request.ProductId, cancellationToken);
 
-        product.AddProductVariant(request.SizeId, request.Quantity, request.SwatchId);
+        product!.AddProductVariant(request.SizeId, request.Quantity, request.SwatchId);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
