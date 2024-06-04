@@ -6,7 +6,7 @@ namespace Digitall.Warehouse.Domain.Exceptions
     {
         public static class ProductVariant
         {
-            public static Error DuplicatedItemBySize => new("ProductVariant.DuplicatedItem", "An item with specifcied size already exists.");
+            public static Error DuplicatedItemBySize => new("ProductVariant.DuplicatedItem", "An item with specified size already exists.");
         }
     }
 }

@@ -9,6 +9,7 @@ public class ProductToGetProductResponseProfile : Profile
     public ProductToGetProductResponseProfile()
     {
         CreateMap<Product, GetProductResponse>()
+            .ForCtorParam(nameof(GetProductResponse.Id), opt => opt.MapFrom(src => src.Id))
             .ForCtorParam(nameof(GetProductResponse.Title), opt => opt.MapFrom(src => src.Title))
             .ForCtorParam(nameof(GetProductResponse.Description), opt => opt.MapFrom(src => src.Description))
             .ForCtorParam(nameof(GetProductResponse.Price), opt => opt.MapFrom(src => src.Price))
