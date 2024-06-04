@@ -1,5 +1,4 @@
 ﻿using Digitall.Warehouse.Application.Abstractions.Persistence;
-using Digitall.Warehouse.Application.Features.Categories;
 using Digitall.Warehouse.Application.Features.Products.Extensions;
 using FluentValidation;
 

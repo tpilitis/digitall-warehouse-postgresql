@@ -1,5 +1,4 @@
-﻿using Digitall.Warehouse.Application.Features.Categories;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Digitall.Warehouse.Application.Features.Products.Queries;
 

@@ -72,6 +72,12 @@ public class Product : Entity
 
     public void AddProductVariant(Guid sizeId, int quantity, Guid? swatchId)
     {
+        if (_productVariants.Any(variant => variant.SizeId == sizeId))
+        {
+            // TODO throw Domain Exception
+
+        }
+
         _productVariants.Add(ProductVariant.Create(Id, sizeId, quantity, swatchId));
 
         // TODO: Raise D-Event
