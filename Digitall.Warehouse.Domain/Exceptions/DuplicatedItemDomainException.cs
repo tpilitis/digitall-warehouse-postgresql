@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Digitall.Warehouse.Domain.Shared;
 
-namespace Digitall.Warehouse.Domain.Exceptions
+namespace Digitall.Warehouse.Domain.Exceptions;
+
+public class DuplicatedItemDomainException(Error error) : DomainException(error)
 {
-    public class DuplicatedItemDomainException : DomainException()
-    {
-    }
 }

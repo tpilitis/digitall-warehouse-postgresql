@@ -1,4 +1,5 @@
 ﻿using Digitall.Warehouse.Api.Infrastructure.ExceptionHandling.Models;
+using Digitall.Warehouse.Domain.Exceptions;
 using FluentValidation;
 using System.Net;
 
@@ -24,9 +25,21 @@ namespace Digitall.Warehouse.Api.Infrastructure.ExceptionHandling
             {
                 HandleException(context, ex);
             }
+            catch (DomainException ex)
+            {
+                HandleException(context, ex);
+            }
         }
 
-        private async void HandleException(HttpContext context, ValidationException ex)
+        private static async void HandleException(HttpContext context, DomainException ex)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+
+            var response = new ValidationErrorResponse(ex.Error);
+            await context.Response.WriteAsJsonAsync(response);
+        }
+
+        private static async void HandleException(HttpContext context, ValidationException ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
