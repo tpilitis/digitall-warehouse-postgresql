@@ -1,20 +1,20 @@
-﻿using Digitall.Warehouse.Domain.Abstraction;
-using Digitall.Warehouse.Domain.Entities.Products;
+﻿using Digitall.Warehouse.Domain.Entities.Products;
 
-namespace Digitall.Warehouse.Application.Abstractions.Persistence
+namespace Digitall.Warehouse.Application.Abstractions.Persistence;
+
+public interface IProductRepository
 {
-    public interface IProductRepository
-    {
-        Task<Product?> GetByIdAsync(Guid productId, CancellationToken cancellationToken);
+    Task<Product?> GetByIdAsync(Guid productId, CancellationToken cancellationToken);
 
-        Task<Product?> GetByIdWithBrandAsync(Guid productId, CancellationToken cancellationToken);
+    Task<Product?> GetByIdWithBrandAsync(Guid productId, CancellationToken cancellationToken);
 
-        Task AddAsync(Product product, CancellationToken cancellationToken);
+    Task<Product?> GetByIdWithProductVariantAsync(Guid productId, Guid productVariantId, CancellationToken cancellationToken);
 
-        Task<ICollection<Product>> SearchProductsAsync(string title, int skip, int take, CancellationToken cancellationToken);
+    Task AddAsync(Product product, CancellationToken cancellationToken);
 
-        void Remove(Product product);
+    Task<ICollection<Product>> SearchProductsAsync(string title, int skip, int take, CancellationToken cancellationToken);
 
-        void Update(Product entity);
-    }
+    void Remove(Product product);
+
+    void Update(Product entity);
 }
