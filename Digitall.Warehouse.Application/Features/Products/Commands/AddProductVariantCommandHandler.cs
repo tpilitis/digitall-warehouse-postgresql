@@ -14,7 +14,8 @@ public class AddProductVariantCommandHandler(IProductRepository productRepositor
         var product = await _productRepository.GetByIdAsync(request.ProductId, cancellationToken);
         
         product!.AddProductVariant(request.SizeId, request.Quantity, request.SwatchId);
-     
+        _productRepository.Update(product);
+
         return Result.Success();
     }
 }
