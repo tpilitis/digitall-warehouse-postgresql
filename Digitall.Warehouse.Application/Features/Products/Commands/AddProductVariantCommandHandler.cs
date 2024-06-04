@@ -4,18 +4,17 @@ using Digitall.Warehouse.Domain.Shared;
 
 namespace Digitall.Warehouse.Application.Features.Products.Commands;
 
-public class AddProductVariantCommandHandler(IUnitOfWork unitOfWork) : ICommandHandler<AddProductVariantCommand>
+public class AddProductVariantCommandHandler(IProductRepository productRepository) :
+    ICommandHandler<AddProductVariantCommand>
 {
-    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly IProductRepository _productRepository = productRepository;
 
     public async Task<Result> Handle(AddProductVariantCommand request, CancellationToken cancellationToken)
     {
-        var product = await _unitOfWork.Products.GetByIdAsync(request.ProductId, cancellationToken);
-
+        var product = await _productRepository.GetByIdAsync(request.ProductId, cancellationToken);
+        
         product!.AddProductVariant(request.SizeId, request.Quantity, request.SwatchId);
-
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
-
+     
         return Result.Success();
     }
 }

@@ -4,19 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Digitall.Persistance.EF;
 
-public class UnitOfWork(
-    WarehouseDbContext dbContext,
-    ICategoryRepository categoryRepository,
-    IProductRepository productRepository,
-    IBrandRepository brandRepository) : IUnitOfWork
+public class UnitOfWork(WarehouseDbContext dbContext) : IUnitOfWork
 {
     private readonly WarehouseDbContext _dbContext = dbContext;
-
-    public ICategoryRepository Categories { get; init; } = categoryRepository;
-
-    public IProductRepository Products { get; init; } = productRepository;
-
-    public IBrandRepository Brands { get; init; } = brandRepository;
 
     public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {

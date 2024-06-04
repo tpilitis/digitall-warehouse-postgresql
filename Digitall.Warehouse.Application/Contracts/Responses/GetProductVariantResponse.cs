@@ -2,4 +2,4 @@
 
 namespace Digitall.Warehouse.Application.Contracts.Responses;
 
-public sealed record GetProductVariantResponse(int ProductId, SizeDto Size, SwatchDto? Swatch, int Quantity);
+public sealed record GetProductVariantResponse(Guid ProductId, SizeDto Size, SwatchDto? Swatch, int Quantity);

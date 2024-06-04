@@ -7,7 +7,7 @@ namespace Digitall.Persistance.EF.Repositories
 {
     public class ProductVariantRepository(WarehouseDbContext dbContext) 
         : Repository<ProductVariant>(dbContext), IProductVariantRepository
-    {
+    { 
         public Task<List<ProductVariant>> GetVariantsAsync(Guid productId, CancellationToken cancellationToken)
         {
             var specification = new GetProductVariantWithSizeAndSwatchSpecification(productId);

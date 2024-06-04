@@ -38,9 +38,9 @@ builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(ApplicationAssemblyReference.Assembly);
 
-    config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-    config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(VoidCommandValidatiorBehavior<,>));
-    config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(RequestValidatiorBehavior<,>));
+    config.AddOpenBehavior(typeof(LoggingBehavior<,>));
+    config.AddOpenBehavior(typeof(VoidCommandValidatiorBehavior<,>));
+    config.AddOpenBehavior(typeof(UnitOfWorkBehavior<,>));
 });
 
 builder.Services.AddAutoMapper([ApplicationAssemblyReference.Assembly]);
