@@ -27,5 +27,15 @@ namespace Digitall.Persistance.EF.Repositories
             return await ApplySpecification(getByIdWithBrandSpecification)
                 .FirstOrDefaultAsync(cancellationToken);
         }
+
+        public async Task<Product?> GetByIdWithProductVariantBySizeIdAsync(
+            Guid productId,
+            Guid productVariantId,
+            CancellationToken cancellationToken)
+        {
+            var getProductWithVariantSpecification = new GetProductByIdWithVariantBySizeIdSpecification(productId, productVariantId);
+            return await ApplySpecification(getProductWithVariantSpecification)
+                .FirstOrDefaultAsync(cancellationToken);
+        }
     }
 }

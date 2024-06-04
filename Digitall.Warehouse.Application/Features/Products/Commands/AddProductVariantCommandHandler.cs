@@ -11,7 +11,7 @@ public class AddProductVariantCommandHandler(IProductRepository productRepositor
 
     public async Task<Result> Handle(AddProductVariantCommand request, CancellationToken cancellationToken)
     {
-        var product = await _productRepository.GetByIdAsync(request.ProductId, cancellationToken);
+        var product = await _productRepository.GetByIdWithProductVariantBySizeIdAsync(request.ProductId, request.SizeId, cancellationToken);
         
         product!.AddProductVariant(request.SizeId, request.Quantity, request.SwatchId);
         _productRepository.Update(product);

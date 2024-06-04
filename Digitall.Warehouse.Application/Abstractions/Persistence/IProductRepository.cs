@@ -8,7 +8,7 @@ public interface IProductRepository
 
     Task<Product?> GetByIdWithBrandAsync(Guid productId, CancellationToken cancellationToken);
 
-    Task<Product?> GetByIdWithProductVariantAsync(Guid productId, Guid productVariantId, CancellationToken cancellationToken);
+    Task<Product?> GetByIdWithProductVariantBySizeIdAsync(Guid productId, Guid sizeId, CancellationToken cancellationToken);
 
     Task AddAsync(Product product, CancellationToken cancellationToken);
 
