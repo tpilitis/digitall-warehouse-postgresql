@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  digitall.warehouse.api:
+    image: ${DOCKER_REGISTRY-}digitallwarehouseapi
+    container_name: digitall.warehouse.api
+    build:
+      context: .
+      dockerfile: Digitall.Warehouse.Api/Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+  digitall.warehouse.database:
+    image: postgres:latest
+    container_name: digitall.warehouse.database
+    environment:
+       - POSTGRES_DB=warehouse
+       - POSTGRES_USER=postgres
+       - POSTGRES_PASSWORD=postgres
+    volumes:
+       - "./.containers/warehouse-db:/var/lib/postgresql/data"
+    ports:
+       - "5432:5432"
+  
+  

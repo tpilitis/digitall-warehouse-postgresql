@@ -6,7 +6,6 @@ using Digitall.Warehouse.Application.Behaviors;
 using Digitall.Warehouse.Application.Extensions;
 using Digitall.Warehouse.Application.Features.Categories.Commands;
 using FluentValidation;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Serilog.Events;

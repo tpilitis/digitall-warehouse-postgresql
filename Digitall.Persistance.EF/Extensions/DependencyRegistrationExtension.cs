@@ -15,7 +15,7 @@ public static class DependencyRegistrationExtension
     {
         services
             .AddDbContext<WarehouseDbContext>(
-                opt => opt.UseSqlServer(configuration.GetConnectionString("WarehouseConnection")));
+                opt => opt.UseNpgsql(configuration.GetConnectionString("WarehouseConnection")));
 
         services.AddScoped<IDataSeedService, ProductDataSeedService>();
 
