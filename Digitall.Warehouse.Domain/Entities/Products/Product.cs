@@ -1,4 +1,5 @@
 using Digitall.Warehouse.Domain.Abstraction;
+using Digitall.Warehouse.Domain.Exceptions;
 
 namespace Digitall.Warehouse.Domain.Entities.Products;
 
@@ -72,6 +73,11 @@ public class Product : Entity
 
     public void AddProductVariant(Guid sizeId, int quantity, Guid? swatchId)
     {
+        if (_productVariants.Any(variant => variant.SizeId == sizeId))
+        {
+            throw new DuplicatedItemDomainException(DomainErrors.ProductVariant.DuplicatedItemBySize);
+        }
+
         _productVariants.Add(ProductVariant.Create(Id, sizeId, quantity, swatchId));
 
         // TODO: Raise D-Event

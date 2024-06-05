@@ -5,14 +5,10 @@ using Digitall.Warehouse.Domain.Shared;
 
 namespace Digitall.Warehouse.Application.Features.Categories.Commands;
 
-public class CreateCategoryCommandHandler : ICommandHandler<CreateCategoryCommand>
+public class CreateCategoryCommandHandler(ICategoryRepository categoryRepository)
+    : ICommandHandler<CreateCategoryCommand>
 {
-    private readonly IUnitOfWork _unitOfWork;
-
-    public CreateCategoryCommandHandler(IUnitOfWork unitOfWork)
-    {
-        _unitOfWork = unitOfWork;
-    }
+    private readonly ICategoryRepository _categoryRepository = categoryRepository;
 
     public async Task<Result> Handle(
         CreateCategoryCommand request,
@@ -20,8 +16,7 @@ public class CreateCategoryCommandHandler : ICommandHandler<CreateCategoryComman
     {
         var category = Category.Create(request.Name);
 
-        await _unitOfWork.Categories.AddAsync(category, cancellationToken);
-        await _unitOfWork.SaveChangesAsync();
+        await _categoryRepository.AddAsync(category, cancellationToken);
 
         return Result.Success(category);
     }

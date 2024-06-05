@@ -2,7 +2,8 @@
 
 namespace Digitall.Warehouse.Application.Contracts.Responses;
 
-public record GetProductResponse(
+public sealed record GetProductResponse(
+    Guid Id,
     string Title,
     string Description,
     Money Price,

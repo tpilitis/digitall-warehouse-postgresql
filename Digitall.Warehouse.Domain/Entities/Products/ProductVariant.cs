@@ -8,7 +8,7 @@ public class ProductVariant : Entity
         Guid productId,
         Guid sizeId,
         int quantity,
-        Guid? swatchId) : base()
+        Guid? swatchId) : base(Guid.Empty)
     {
         ProductId = productId;
         SizeId = sizeId;

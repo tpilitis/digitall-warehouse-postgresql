@@ -1,6 +1,5 @@
 ﻿using Digitall.Warehouse.Application.Abstractions.Persistence;
 using Digitall.Warehouse.Application.Constants;
-using Digitall.Warehouse.Application.Features.Categories;
 using FluentValidation;
 
 namespace Digitall.Warehouse.Application.Features.Products.Commands;
@@ -9,6 +8,8 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
 {
     public CreateProductCommandValidator(ICategoryRepository categoryRepository, IBrandRepository brandRepository)
     {
+        ClassLevelCascadeMode = CascadeMode.Stop;
+
         RuleFor(command => command.Title)
             .NotEmpty();
 

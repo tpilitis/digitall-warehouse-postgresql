@@ -1,6 +1,5 @@
 ﻿using Digitall.Warehouse.Application.Abstractions.Persistence;
 using Digitall.Warehouse.Application.Constants;
-using Digitall.Warehouse.Application.Features.Categories;
 using FluentValidation;
 
 namespace Digitall.Warehouse.Application.Features.Categories.Commands;

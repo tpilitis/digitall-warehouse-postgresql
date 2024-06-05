@@ -1,16 +1,15 @@
 ﻿namespace Digitall.Warehouse.Domain.Abstraction
 {
-    public abstract class Entity: IIdentifiable<Guid>, IAuditable
+    public abstract class Entity(Guid identifier) : IIdentifiable<Guid>, IAuditable
     {
-        public Guid Id { get; init; }
+        public Guid Id { get; init; } = identifier;
 
         public DateTime? CreatedAt { get; set; }
 
         public DateTime? ModifiedAt { get; set; }
 
-        protected Entity()
+        protected Entity() : this(Guid.NewGuid())
         {
-            Id = Guid.NewGuid();
         }
     }
 }

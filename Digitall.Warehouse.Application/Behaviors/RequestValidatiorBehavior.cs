@@ -1,4 +1,5 @@
-﻿using Digitall.Warehouse.Domain.Shared;
+﻿using Digitall.Warehouse.Application.Abstractions;
+using Digitall.Warehouse.Domain.Shared;
 using FluentValidation;
 using MediatR;
 
@@ -8,10 +9,12 @@ public class RequestValidatiorBehavior<TRequest, TResponse> : IPipelineBehavior<
     where TRequest : IRequest<Result<TResponse>>
 {
     IEnumerable<IValidator<TRequest>> _validators;
+    IValidationService _validationService;
 
-    public RequestValidatiorBehavior(IEnumerable<IValidator<TRequest>> validators)
+    public RequestValidatiorBehavior(IEnumerable<IValidator<TRequest>> validators, IValidationService validationService)
     {
         _validators = validators;
+        _validationService = validationService;
     }
 
     public async Task<TResponse> Handle(
@@ -20,19 +23,7 @@ public class RequestValidatiorBehavior<TRequest, TResponse> : IPipelineBehavior<
         CancellationToken cancellationToken)
     {
         // pre
-        if (!_validators.Any())
-        {
-            return await next();
-        }
-
-        var context = new ValidationContext<TRequest>(request);
-        var validationFailures = await Task
-            .WhenAll(
-                _validators.Select(validator => validator.ValidateAsync(context, cancellationToken)));
-
-        var errors = validationFailures
-            .SelectMany(validator => validator.Errors)
-            .Where(error => error is not null);
+        var errors = await _validationService.ValidateRequestAsync(request, _validators, cancellationToken);
 
         if (errors.Any())
         {

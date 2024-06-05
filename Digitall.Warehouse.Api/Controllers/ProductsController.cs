@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Digitall.Warehouse.Api.Contracts.Requests.Products;
 using Digitall.Warehouse.Api.Infrastructure.ExceptionHandling.Models;
+using Digitall.Warehouse.Application.Contracts.Responses;
 using Digitall.Warehouse.Application.Features.Products.Commands;
 using Digitall.Warehouse.Application.Features.Products.Queries;
 using Digitall.Warehouse.Domain.Shared;
@@ -24,12 +25,23 @@ namespace Digitall.Warehouse.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IAsyncResult> GetProductsAsync()
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(PaginatedResponseT<GetProductResponse>))]
+        public async Task<IActionResult> GetProductsAsync(
+            [FromQuery] string keyword,
+            CancellationToken cancellationToken,
+            [FromQuery] int? skip = 0,
+            [FromQuery] int? take = 50)
         {
-            throw new NotImplementedException();
+            var getProductsQuery = new SearchProductsQuery(keyword, skip!.Value, take!.Value);
+            var result = await _sender.Send(getProductsQuery, cancellationToken);
+
+            return Ok(result.Value);
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound, Type = typeof(ValidationErrorResponse))]
+        [ProducesResponseType((int)HttpStatusCode.FailedDependency, Type = typeof(ValidationErrorResponse))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(GetProductResponse))]
         public async Task<IActionResult> GetProductByIdAsync([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var getProductQuery = new GetProductQuery(id);
@@ -37,7 +49,6 @@ namespace Digitall.Warehouse.Api.Controllers
 
             if (result.IsFailure)
             {
-
                 ErrorType.TryFromValue(result.Error.Code, out var errorType);
                 if (errorType != null && errorType == ErrorType.ResourceNotFound)
                 {
