@@ -10,6 +10,15 @@ services:
     ports:
       - "5000:5000"
       - "5001:5001"
+#  migrations:
+#    container_name: digitall.warehouse.migrations
+#    image: service-migrations
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#      target: migrations
+#    depends_on:
+#        - digitall.warehouse.database
   digitall.warehouse.database:
     image: postgres:latest
     container_name: digitall.warehouse.database
