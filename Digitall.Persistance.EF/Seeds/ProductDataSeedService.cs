@@ -31,7 +31,7 @@ public class ProductDataSeedService : IDataSeedService
 
     private void SeedSizes()
     {
-        if (!_context.Sizes.Any())
+        if (_context?.Sizes?.Any() == true)
         {
             _context.Sizes.AddRange(SeedClothSizes());
             _context.Sizes.AddRange(SeedShoeSizes());
