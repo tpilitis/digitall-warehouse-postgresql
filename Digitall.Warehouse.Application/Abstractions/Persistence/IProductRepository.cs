@@ -16,5 +16,5 @@ public interface IProductRepository
 
     void Remove(Product product);
 
-    void Update(Product entity);
+    void Update(Product product);
 }

@@ -1,4 +1,5 @@
 ﻿using Digitall.Persistance.EF.Repositories;
+using Digitall.Persistance.EF.Repositories.Cached;
 using Digitall.Persistance.EF.Seeds;
 using Digitall.Warehouse.Application;
 using Digitall.Warehouse.Application.Abstractions.Persistence;
@@ -11,7 +12,8 @@ namespace Digitall.Persistance.EF.Extensions;
 public static class DependencyRegistrationExtension
 {
     public static IServiceCollection AddPersistanceEF(
-        this IServiceCollection services, IConfiguration configuration)
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
         services
             .AddDbContext<WarehouseDbContext>(
@@ -21,6 +23,7 @@ public static class DependencyRegistrationExtension
 
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.Decorate<IProductRepository, CachedProductsRepository>();
         services.AddScoped<IBrandRepository, BrandRepository>();
         services.AddScoped<IProductVariantRepository, ProductVariantRepository>();
         services.AddScoped<IProductSwatchRepository, ProductSwatchRepository>();
