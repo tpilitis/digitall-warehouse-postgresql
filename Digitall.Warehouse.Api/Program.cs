@@ -33,6 +33,7 @@ builder.Services.AddSerilog((serviceProvider, loggerConfiguration) =>
 builder.Services.AddPersistanceEF(builder.Configuration);
 
 builder.Services.AddApplicationServices();
+
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(ApplicationAssemblyReference.Assembly);
@@ -57,6 +58,8 @@ mvcBuilder
             return new BadRequestObjectResult(modelState.ToErrorResponse());
         };
     });
+
+builder.Services.AddStackExchangeRedisCache(opt => opt.Configuration = builder.Configuration.GetConnectionString("CacheConnection"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
