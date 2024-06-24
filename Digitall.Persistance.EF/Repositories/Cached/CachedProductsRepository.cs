@@ -6,7 +6,10 @@ using Newtonsoft.Json;
 
 namespace Digitall.Persistance.EF.Repositories.Cached;
 
-public class CachedProductsRepository(IProductRepository productRepository, IDistributedCache cache, WarehouseDbContext dbContext) : IProductRepository
+public class CachedProductsRepository(
+    IProductRepository productRepository,
+    IDistributedCache cache,
+    WarehouseDbContext dbContext) : IProductRepository
 {
     private readonly IProductRepository _productRepository = productRepository;
     private readonly IDistributedCache _cache = cache;
@@ -19,10 +22,11 @@ public class CachedProductsRepository(IProductRepository productRepository, IDis
 
     public async Task<Product?> GetByIdAsync(Guid productId, CancellationToken cancellationToken)
     {
-        var productString = await _cache.GetStringAsync(CacheConstants.GetProductByIdCacheIdentifier(productId));
+        var cacheIdentifier = CacheIdentifierConstants.GetProductById(productId);
+        var productValue = await _cache.GetStringAsync(cacheIdentifier);
 
         Product? product;
-        if (productString == null)
+        if (productValue == null)
         {
             // no cache - set cache if not null
             product = await _productRepository.GetByIdAsync(productId, cancellationToken);
@@ -31,7 +35,7 @@ public class CachedProductsRepository(IProductRepository productRepository, IDis
                 return product;
             }
 
-            var productValue = JsonConvert.SerializeObject(product);
+            productValue = JsonConvert.SerializeObject(product);
 
             var options = new DistributedCacheEntryOptions()
             {
@@ -39,7 +43,7 @@ public class CachedProductsRepository(IProductRepository productRepository, IDis
             };
 
             await _cache.SetStringAsync(
-                CacheConstants.GetProductByIdCacheIdentifier(productId),
+                CacheIdentifierConstants.GetProductById(productId),
                 productValue,
                 options,
                 cancellationToken);
@@ -48,7 +52,7 @@ public class CachedProductsRepository(IProductRepository productRepository, IDis
         }
 
         // deserialise
-        product = JsonConvert.DeserializeObject<Product>(productString,
+        product = JsonConvert.DeserializeObject<Product>(productValue,
             new JsonSerializerSettings()
             {
                 ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
@@ -65,7 +69,41 @@ public class CachedProductsRepository(IProductRepository productRepository, IDis
 
     public async Task<Product?> GetByIdWithBrandAsync(Guid productId, CancellationToken cancellationToken)
     {
-        return await _productRepository.GetByIdWithBrandAsync(productId, cancellationToken);
+        var cacheIdentifier = CacheIdentifierConstants.GetProductByIdWithBrand(productId);
+        var productValue = await _cache.GetStringAsync(cacheIdentifier);
+        
+        Product? product;
+        if (productValue == null)
+        {
+            product = await _productRepository.GetByIdWithBrandAsync(productId, cancellationToken);
+            if (product == null)
+            {
+                return product;
+            }
+
+            productValue = JsonConvert.SerializeObject(product);
+            
+            var options = new DistributedCacheEntryOptions()
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
+            };
+            _cache.SetString(cacheIdentifier, productValue, options);
+        }
+
+        // deserialise
+        product = JsonConvert.DeserializeObject<Product>(productValue,
+            new JsonSerializerSettings()
+            {
+                ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
+                ContractResolver = new PrivateResolver()
+            });
+
+        if (product is not null)
+        {
+            _dbContext.Set<Product>().Attach(product!);
+        }
+
+        return product;
     }
 
     public async Task<Product?> GetByIdWithProductVariantBySizeIdAsync(Guid productId, Guid sizeId, CancellationToken cancellationToken)

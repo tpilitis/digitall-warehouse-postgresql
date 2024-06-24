@@ -22,13 +22,14 @@ public static class DependencyRegistrationExtension
         services.AddScoped<IDataSeedService, ProductDataSeedService>();
 
         services.AddScoped<ICategoryRepository, CategoryRepository>();
-        services.AddScoped<IProductRepository, ProductRepository>();
-        services.Decorate<IProductRepository, CachedProductsRepository>();
         services.AddScoped<IBrandRepository, BrandRepository>();
         services.AddScoped<IProductVariantRepository, ProductVariantRepository>();
         services.AddScoped<IProductSwatchRepository, ProductSwatchRepository>();
         services.AddScoped<IProductSizeRepository, ProductSizeRepository>();
 
+        services.AddScoped<IProductRepository, ProductRepository>();
+        services.Decorate<IProductRepository, CachedProductsRepository>();
+       
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
