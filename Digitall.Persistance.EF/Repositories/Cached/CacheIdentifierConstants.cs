@@ -5,5 +5,7 @@
         public static string GetProductById(Guid productId) => $"{nameof(GetProductById)}_{productId}";
 
         public static string GetProductByIdWithBrand(Guid productId) => $"{nameof(GetProductByIdWithBrand)}_{productId}";
+
+        public static string GetByIdWithProductVariantBySizeId(Guid productId, Guid sizeId) => $"{nameof(GetByIdWithProductVariantBySizeId)}_{productId}_{sizeId}";
     }
 }

@@ -2,6 +2,7 @@
 using Digitall.Persistance.EF.Repositories.Cached;
 using Digitall.Persistance.EF.Seeds;
 using Digitall.Warehouse.Application;
+using Digitall.Warehouse.Application.Abstractions.Cache;
 using Digitall.Warehouse.Application.Abstractions.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +30,8 @@ public static class DependencyRegistrationExtension
 
         services.AddScoped<IProductRepository, ProductRepository>();
         services.Decorate<IProductRepository, CachedProductsRepository>();
+
+        services.AddScoped<ICache, Cache>();
        
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 

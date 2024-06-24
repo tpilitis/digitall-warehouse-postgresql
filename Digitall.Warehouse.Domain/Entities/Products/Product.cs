@@ -8,6 +8,11 @@ public class Product : Entity
     private HashSet<Category> _categories = [];
     private HashSet<ProductVariant> _productVariants = [];
 
+    /// <summary>
+    /// Parameterless ctor required for deserialisation.
+    /// </summary>
+    private Product() { }
+
     private Product(
         string title,
         string description,

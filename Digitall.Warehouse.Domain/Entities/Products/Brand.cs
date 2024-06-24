@@ -6,6 +6,11 @@ public class Brand: Entity
 {
     private HashSet<Product> _products = [];
 
+    /// <summary>
+    /// Parameterless ctor required for deserialisation.
+    /// </summary>
+    private Brand() { }
+    
     private Brand(string name) : base()
     {
         Name = name;
